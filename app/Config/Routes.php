@@ -16,4 +16,5 @@ $routes->group('admin', ['namespace' => 'App\Modules\Admin\Controllers'], static
     require __DIR__ . '/Routes/AdminRoutes.php';
 });
 
+// Rutas de CodeIgniter Shield
 service('auth')->routes($routes);

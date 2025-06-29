@@ -7,6 +7,19 @@ class Dashboard extends BaseController
 {
     public function index(): string
     {
-        return '<h1>¡Bienvenido al Panel de Administración!</h1>';
+        $data = [
+            'username' => 'jhonatanhzb',
+            'recipes' => [],
+            'correct_recipes' => [],
+            'incorrect_recipes' => [],
+            'categories' => [],
+            'recipe_with_category' => [],
+            'tags' => [],
+            'recipes_with_tag' => [],
+            'recipe_without_category' => [],
+            'last_recipes_updated' => []
+        ];
+
+        return view('admin/pages/index', $data);
     }
 }
