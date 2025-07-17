@@ -1,0 +1,186 @@
+<?php
+
+namespace App\Modules\Admin\Models;
+
+use App\Entities\Recipe;
+use App\Entities\RecipeEntity;
+use CodeIgniter\Model;
+
+class RecipeModel extends Model
+{
+
+    protected $table = 'recipe';
+    protected $primaryKey = 'id';
+    protected $returnType = \App\Entities\Recipe::class;
+    protected $allowedFields = ['user_id', 'name', 'slug', 'description', 'status', 'image', 'portions', 'ingredients',
+                                'instructions', 'time', 'baked', 'difficulty', 'refrigeration', 'calories',
+                                'calories_unit', 'carbohydrates', 'carbohydrates_unit', 'protein', 'protein_unit',
+                                'fat', 'fat_unit'];
+    protected bool $updateOnlyChanged = true;
+    protected $useSoftDeletes = false;
+
+    // Dates
+    protected $useTimestamps = true;
+    protected $dateFormat = 'datetime';
+    protected $createdField = 'created_at';
+    protected $updatedField = 'updated_at';
+
+    public function setRecipe($data): int
+    {
+        if ($this->save($data)) {
+            return $this->getInsertID();
+        }
+
+        return 0;
+    }
+
+    public function updateRecipe($data): int {
+        $recipe_id = $data['id'];
+
+        if ($this->update($recipe_id, $data)) {
+            return $recipe_id;
+        }
+
+        return 0;
+    }
+
+    public function getLastRecipesUpdated(): array
+    {
+        return $this->select('
+            id,
+            name,
+            slug,
+            DATE_FORMAT(created_at, "%d/%m/%Y") as created_at,
+            DATE_FORMAT(updated_at, "%d/%m/%Y") as updated_at
+        ')
+            ->orderBy('recipe.updated_at', 'DESC')
+            ->limit(5)
+            ->get()->getResult();
+    }
+
+    public function getCorrectRecipes(): int
+    {
+        return $this->where('image !=', ' ')
+            ->where('ingredients !=', ' ')
+            ->where('instructions !=', ' ')
+            ->where('time !=', ' ')
+            ->where('difficulty !=', ' ')
+            ->countAllResults();
+    }
+
+    public function getIncorrectRecipes(): int
+    {
+        return $this->where('image', ' ')
+            ->orWhere('ingredients', ' ')
+            ->orWhere('instructions', ' ')
+            ->orWhere('time', ' ')
+            ->orWhere('difficulty', ' ')
+            ->countAllResults();
+    }
+
+    public function getRecipesWithCategories(): array
+    {
+        $builder = $this->builder();
+
+        $builder->select('
+            recipe.id,
+            recipe.name,
+            recipe.created_at,
+            recipe.updated_at,
+            GROUP_CONCAT(category.name SEPARATOR ", ") as categories   
+        ');
+
+        $builder->join('recipe_category', 'recipe_category.recipe_id = recipe.id');
+
+        $builder->join('category', 'category.id = recipe_category.category_id');
+
+        $builder->groupBy('recipe.id');
+
+        $builder->orderBy('recipe.created_at', 'DESC');
+
+        return $builder->get()->getResult();
+    }
+
+    public function getRecipesWithoutCategories(): array
+    {
+        $builder = $this->builder();
+
+        $builder->select('
+            recipe.id,
+            recipe.name,
+            recipe.created_at,
+            recipe.updated_at
+        ');
+
+        $builder->where('recipe.id NOT IN (SELECT recipe_id FROM recipe_category)');
+
+        $builder->orderBy('recipe.created_at', 'DESC');
+
+        return $builder->get()->getResult();
+    }
+
+    public function getRecipesWithTags(): array
+    {
+        $builder = $this->builder();
+
+        $builder->select('
+            recipe.id,
+            recipe.name,
+            recipe.created_at,
+            recipe.updated_at,
+            GROUP_CONCAT(tag.name SEPARATOR ", ") as tags 
+        ');
+
+        $builder->join('recipe_tag', 'recipe_tag.recipe_id = recipe.id');
+
+        $builder->join('tag', 'tag.id = recipe_tag.tag_id');
+
+        $builder->groupBy('recipe.id');
+
+        $builder->orderBy('recipe.created_at', 'DESC');
+
+        return $builder->get()->getResult();
+    }
+
+    public function getRecipeWithCategoriesAndTags($id)
+    {
+        $builder = $this->builder();
+        $builder->select("
+            recipe.id,
+            recipe.name,
+            recipe.description,
+            recipe.status,
+            recipe.image,
+            recipe.portions,
+            recipe.ingredients,
+            recipe.instructions,
+            recipe.time,
+            recipe.baked,
+            recipe.difficulty,
+            recipe.refrigeration,
+            recipe.calories,
+            recipe.calories_unit,
+            recipe.carbohydrates,
+            recipe.carbohydrates_unit,
+            recipe.protein,
+            recipe.protein_unit,
+            recipe.fat,
+            recipe.fat_unit,
+            CONCAT('[', GROUP_CONCAT(DISTINCT category.id SEPARATOR ', '), ']') as categories,
+            CONCAT('[', GROUP_CONCAT(DISTINCT tag.id SEPARATOR ', '), ']') as tags
+        ");
+        $builder->join('recipe_category', 'recipe_category.recipe_id = recipe.id', 'left');
+        $builder->join('category', 'category.id = recipe_category.category_id', 'left');
+        $builder->join('recipe_tag', 'recipe_tag.recipe_id = recipe.id', 'left');
+        $builder->join('tag', 'tag.id = recipe_tag.tag_id', 'left');
+        $builder->groupBy('recipe.id');
+        $builder->where('recipe.id', $id);
+        return $builder->get()->getCustomRowObject(0, Recipe::class);
+    }
+
+    public function getDrafts(): array
+    {
+        return $this->where('status', 'draft')->findAll();
+    }
+
+}

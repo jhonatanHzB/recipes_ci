@@ -1,3 +1,53 @@
+.loader-wrapper {
+    width: 100%;
+    height: 20vh;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    width: 100%;
+}
+
+.input-group input[type="number"] {
+    text-align: center;
+}
+
+.input-group button[id^="increment"],
+.input-group button[id^="decrement"] {
+    padding: 0.375rem 0.75rem;
+    line-height: 1;
+}
+
+.input-group button[id^="increment"] {
+    border-radius: 0 4px 0 0 !important;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 4;
+    height: 50%;
+}
+
+.input-group button[id^="decrement"] {
+    border-radius: 0 0 4px 0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 4;
+    height: 50%;
+}
+
+.input-group .input-group-text {
+    margin-right: 38px;
+}
+
 .recipe-dropzone {
     border: 2px dashed #ccc;
     background: #fafafa;

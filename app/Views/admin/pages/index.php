@@ -20,11 +20,11 @@
             <div class="main-dashboard-header-right">
                 <div>
                     <label class="fs-13 text-muted">Total de recetas</label>
-                    <h5 class="mb-0 fw-semibold"><?= count($recipes) ?></h5>
+                    <h5 class="mb-0 fw-semibold"><?= $total_recipes ?></h5>
                 </div>
                 <div>
                     <label class="fs-13 text-muted">Recetas con categoria</label>
-                    <h5 class="mb-0 fw-semibold"><?= count($recipe_with_category) ?></h5>
+                    <h5 class="mb-0 fw-semibold"><?= count($recipes_with_category) ?></h5>
                 </div>
                 <div>
                     <label class="fs-13 text-muted">Recetas con etiquetas</label>
@@ -50,7 +50,7 @@
                             <div class="col-6">
                                 <div class="mt-0 text-center">
                                     <span class="text-fixed-white">RECETAS CORRECTAS</span>
-                                    <h3 class="text-fixed-white mb-0"><?= count($correct_recipes) ?></h3>
+                                    <h3 class="text-fixed-white mb-0"><?= $correct_recipes ?></h3>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                             <div class="col-6">
                                 <div class="mt-0 text-center">
                                     <span class="text-fixed-white">TOTAL DE CATEGORIAS</span>
-                                    <h3 class="text-fixed-white mb-0"><?= count($categories) ?></h3>
+                                    <h3 class="text-fixed-white mb-0"><?= $total_categories ?></h3>
                                 </div>
                             </div>
                         </div>
@@ -90,7 +90,7 @@
                             <div class="col-6">
                                 <div class="mt-0 text-center">
                                     <span class="text-fixed-white">TOTAL DE ETIQUETAS</span>
-                                    <h3 class="text-fixed-white mb-0"><?= count($tags) ?></h3>
+                                    <h3 class="text-fixed-white mb-0"><?= $total_tags ?></h3>
                                 </div>
                             </div>
                         </div>
@@ -110,7 +110,7 @@
                             <div class="col-6">
                                 <div class="mt-0 text-center">
                                     <span class="text-fixed-white">RECETAS INCORRECTAS</span>
-                                    <h3 class="text-fixed-white mb-0"><?= count($incorrect_recipes) ?></h3>
+                                    <h3 class="text-fixed-white mb-0"><?= $incorrect_recipes ?></h3>
                                 </div>
                             </div>
                         </div>
@@ -146,11 +146,11 @@
                     <div class="card-body">
                         <div class="total-revenue">
                             <div>
-                                <h4><?= count($recipe_with_category) ?></h4>
+                                <h4><?= count($recipes_with_category) ?></h4>
                                 <label><span class="bg-primary"></span>Con categoria</label>
                             </div>
                             <div>
-                                <h4><?= count($recipe_without_category) ?></h4>
+                                <h4><?= count($recipes_without_category) ?></h4>
                                 <label><span class="bg-danger"></span>Sin categoria</label>
                             </div>
                         </div>
@@ -186,7 +186,7 @@
                                 <label><span class="bg-primary"></span>Con etiqueta</label>
                             </div>
                             <div>
-                                <h4><?= count($tags) ?></h4>
+                                <h4><?= $total_tags ?></h4>
                                 <label><span class="bg-info"></span>Total de etiquetas</label>
                             </div>
                         </div>
@@ -219,19 +219,30 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach ($last_recipes_updated as $last_recipes_updated): ?>
+                                <?php foreach ($last_recipes_updated as $recipe): ?>
                                     <tr>
-                                        <td><?= $last_recipes_updated['recipe_id'] ?></td>
-                                        <td><?= $last_recipes_updated['recipe_title'] ?></td>
-                                        <td><?= $last_recipes_updated['recipe_updated_at'] ?></td>
+                                        <td><?= $recipe->id ?></td>
+                                        <td><?= $recipe->name ?></td>
+                                        <td><?= $recipe->updated_at ?></td>
                                         <td>
                                             <div class="hstack gap-2 flex-wrap">
-                                                <a href="<?= base_url() ?>recipes/<?= $last_recipes_updated['recipe_id'] ?>"
-                                                   class="btn btn-info-light fs-14 lh-1" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-info" title="Editar receta">
+                                                <a
+                                                    href="<?= base_url() ?>recipes/<?= $recipe->id ?>"
+                                                    class="btn btn-primary-light fs-14 lh-1"
+                                                    data-bs-toggle="tooltip"
+                                                    data-bs-placement="top"
+                                                    data-bs-custom-class="tooltip-info"
+                                                    title="Editar receta">
                                                     <i class="ri-edit-line"></i>
                                                 </a>
-                                                <a href="<?= base_url() ?>receta/<?= $last_recipes_updated['recipe_slug'] ?>"
-                                                   class="btn btn-success-light fs-14 lh-1" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-success" title="Ver receta">
+                                                <a
+                                                    href="<?= base_url() ?>receta/<?= $recipe->slug ?>"
+                                                    class="btn btn-info-light fs-14 lh-1"
+                                                    target="_blank"
+                                                    data-bs-toggle="tooltip"
+                                                    data-bs-placement="top"
+                                                    data-bs-custom-class="tooltip-success"
+                                                    title="Ver receta">
                                                     <i class="ri-eye-line"></i>
                                                 </a>
                                             </div>
@@ -261,7 +272,28 @@
                                     <th scope="col">Acción</th>
                                 </tr>
                                 </thead>
-                                <tbody id="sections-table"></tbody>
+                                <tbody>
+                                <?php foreach ($sections as $section): ?>
+                                    <tr>
+                                        <td><?= $section->id ?></td>
+                                        <td><?= $section->name ?></td>
+                                        <td><?= $section->updated_at ?></td>
+                                        <td>
+                                            <div class="hstack gap-2 flex-wrap">
+                                                <button
+                                                    type="button"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#sectionModal"
+                                                    data-section-id="<?= $section->id ?>"
+                                                    data-section-name="<?= $section->name ?>"
+                                                    class="btn btn-primary-light fs-14 lh-1">
+                                                    <i class="ri-edit-line"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -275,7 +307,7 @@
         <div class="row">
 
             <!-- card of draft recipes -->
-            <div class="col-12 col-md-8">
+            <div class="col-12">
                 <div class="card mb-4 mb-lg-0 mb-xl-4">
                     <div class="card-body">
                         <h4 class="card-title">Borrador de recetas</h4>
@@ -290,7 +322,38 @@
                                     <th scope="col">Acciones</th>
                                 </tr>
                                 </thead>
-                                <tbody id="draft-table"></tbody>
+                                <tbody>
+                                <?php foreach ($draft_recipes as $recipe): ?>
+                                    <tr>
+                                        <td><?= $recipe->id ?></td>
+                                        <td><?= $recipe->name ?></td>
+                                        <td><?= $recipe->description ?></td>
+                                        <td><?= $recipe->difficulty ?></td>
+                                        <td>
+                                            <div class="hstack gap-2 flex-wrap">
+                                                <a
+                                                    href="<?= base_url() ?>admin/recipe/update/<?= $recipe->id ?>"
+                                                    class="btn btn-primary-light fs-14 lh-1"
+                                                    data-bs-toggle="tooltip"
+                                                    data-bs-placement="top"
+                                                    data-bs-custom-class="tooltip-info"
+                                                    title="Editar receta">
+                                                    <i class="ri-edit-line"></i>
+                                                </a>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-danger-light fs-14 lh-1"
+                                                    data-bs-toggle="tooltip"
+                                                    data-bs-placement="top"
+                                                    data-bs-custom-class="tooltip-danger"
+                                                    title="Eliminar">
+                                                    <i class="ri-delete-bin-7-line"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -305,7 +368,164 @@
 </div>
 <!-- End::app-content -->
 
+<!-- Modal para editar las secciones -->
+<div class="modal fade" id="sectionModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="sectionModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar sección</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <!-- Mostrar un loader antes de cargar el contenido -->
+                <div class="loader-wrapper" id="loader-wrapper">
+                    <img src="<?= base_url(); ?>assets/admin/img/loader.svg" alt="Cargando...">
+                </div>
+                <div id="section-wrapper"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary-light" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-teal-light" form="sectionUpdateForm">Guardar cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Chart JS -->
 <script src="<?= base_url(); ?>assets/admin/js/index.js"></script>
+
+<script>
+    function createCategoryChart() {
+        const categories = <?= json_encode($categories_chart) ?>;
+
+        const colors = [
+            '#2B56E2',
+            '#2B56E2',
+            '#2B56E2',
+            '#2B56E2',
+            '#2B56E2',
+            '#2B56E2',
+            '#2B56E2',
+            '#2B56E2',
+            '#2B56E2',
+            '#2B56E2',
+        ];
+
+        const options = {
+            series: [
+                {
+                    name: 'Registros',
+                    data: categories.values,
+                },
+            ],
+            chart: {
+                height: 350,
+                type: 'bar',
+                events: {
+                    click: function (chart, w, e) {
+                        console.log(chart, w, e)
+                    },
+                },
+            },
+            colors: colors,
+            plotOptions: {
+                bar: {
+                    columnWidth: '45%',
+                    distributed: true,
+                },
+            },
+            dataLabels: {
+                enabled: false,
+            },
+            legend: {
+                show: false,
+            },
+            xaxis: {
+                categories: categories.names,
+                labels: {
+                    style: {
+                        colors: colors,
+                        fontSize: '12px',
+                    },
+                },
+            },
+        };
+
+        const categories_bar = new ApexCharts(
+            document.querySelector('#categories-bar'),
+            options
+        );
+
+        categories_bar.render();
+    }
+
+    function createTagsChart() {
+        const tags = <?= json_encode($tags_chart) ?>;
+
+        const colors = [
+            '#E87035',
+            '#E87035',
+            '#E87035',
+            '#E87035',
+            '#E87035',
+            '#E87035',
+            '#E87035',
+            '#E87035',
+            '#E87035',
+            '#E87035',
+        ];
+
+        const options = {
+            series: [
+                {
+                    name: 'Recetas con etiqueta',
+                    data: tags.values,
+                },
+            ],
+            chart: {
+                height: 350,
+                type: 'bar',
+                events: {
+                    click: function (chart, w, e) {
+                        console.log(chart, w, e)
+                    },
+                },
+            },
+            colors: colors,
+            plotOptions: {
+                bar: {
+                    columnWidth: '45%',
+                    distributed: true,
+                },
+            },
+            dataLabels: {
+                enabled: false,
+            },
+            legend: {
+                show: false,
+            },
+            xaxis: {
+                categories: tags.names,
+                labels: {
+                    style: {
+                        colors: colors,
+                        fontSize: '12px',
+                    },
+                },
+            },
+            stroke: {
+                width: 1,
+            },
+        };
+
+        const tags_bar = new ApexCharts(
+            document.querySelector('#tags-bar'),
+            options
+        );
+
+        tags_bar.render();
+    }
+
+</script>
 
 <?= $this->endSection(); ?>

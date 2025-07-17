@@ -7,19 +7,14 @@ use CodeIgniter\View\Cells\Cell;
 class HeaderCell extends Cell
 {
 
-
-    public function __construct()
-    {
-    }
+    public array $data;
 
     public function render(): string
     {
-        $data = [
-            'username' => 'jhonatan',
-            'email' => 'jhonatanhzb@outlook.com'
-        ];
+        $user = auth()->user();
+        $this->data['username'] = $user->username;
 
-        return $this->view('../Views/admin/components/header', $data);
+        return $this->view('../Views/admin/components/header', $this->data);
     }
 
 }

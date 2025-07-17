@@ -11,6 +11,17 @@
   window.addEventListener("load", hideLoader);
   /* page loader */
 
+  /* sidebar */
+
+  const sidebarItems = document.querySelectorAll(".slide");
+  const location = window.location.href;
+  const activeItem = Array.from(sidebarItems).find((item) => {
+    return item.querySelector("a").href === location;
+  })
+  activeItem.querySelector(".side-menu__item").classList.add("active");
+
+  /* sidebar */
+
   /* tooltip */
   const tooltipTriggerList = document.querySelectorAll(
     '[data-bs-toggle="tooltip"]'

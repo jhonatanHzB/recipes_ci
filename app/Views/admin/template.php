@@ -24,7 +24,7 @@
     <!-- Style Css -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/admin/css/styles.css" />
 
-    <!-- Style Css -->
+    <!-- Admin Css -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/admin/css/admin.css" />
 
     <!-- Icons Css -->
@@ -40,12 +40,12 @@
     <!-- Animate CSS -->
     <link rel="styleskheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
-    <!-- JQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
     <script>
         const baseURL = '<?= base_url(); ?>';
     </script>
+
+    <!-- AXIOS -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </head>
 
@@ -99,13 +99,16 @@
 
     <!-- Custom-Switcher JS -->
     <script src="<?= base_url(); ?>assets/admin/js/custom-switcher.min.js"></script>
-    <!-- End scripts necesario para barra de configuración de temas  -->
+    <!-- End scripts necesarios para barra de configuración de temas  -->
 
     <!-- Apex Charts JS -->
     <script src="<?= base_url(); ?>assets/admin/js/apexcharts.min.js"></script>
 
     <!-- Custom JS -->
     <script src="<?= base_url(); ?>assets/admin/js/custom.js"></script>
+
+    <!-- Vendor JS -->
+    <script src="<?= base_url(); ?>assets/admin/js/vendor.js"></script>
 
 </body>
 

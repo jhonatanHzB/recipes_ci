@@ -109,8 +109,7 @@
                     <li>
                         <div class="main-header-profile bg-primary menu-header-content text-fixed-white">
                             <div class="my-auto">
-                                <h6 class="mb-0 lh-1 text-fixed-white"><?= $username ?></h6><span
-                                    class="fs-11 op-7 lh-1"><?= $email ?></span>
+                                <h6 class="mb-0 lh-1 text-fixed-white"><?= $username ?></h6>
                             </div>
                         </div>
                     </li>

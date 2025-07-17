@@ -19,14 +19,16 @@ use CodeIgniter\Config\BaseService;
  */
 class Services extends BaseService
 {
-    /*
-     * public static function example($getShared = true)
-     * {
-     *     if ($getShared) {
-     *         return static::getSharedInstance('example');
-     *     }
-     *
-     *     return new \CodeIgniter\Example();
-     * }
-     */
+
+    public static function recipeRepository($getShared = true)
+    {
+        if ($getShared) {
+            return static::getSharedInstance('recipeRepository');
+        }
+
+        $db = Database::connect();
+
+        return new \App\Repositories\RecipeRepository($db);
+    }
+
 }
