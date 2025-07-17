@@ -13,12 +13,12 @@
 
   /* sidebar */
 
-  const sidebarItems = document.querySelectorAll(".slide");
+  const sidebarItems = document.querySelectorAll(".side-menu__item");
   const location = window.location.href;
   const activeItem = Array.from(sidebarItems).find((item) => {
-    return item.querySelector("a").href === location;
+    return item.href === location;
   })
-  activeItem.querySelector(".side-menu__item").classList.add("active");
+  activeItem.classList.add("active");
 
   /* sidebar */
 

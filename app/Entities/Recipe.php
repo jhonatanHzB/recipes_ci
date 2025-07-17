@@ -39,27 +39,13 @@ class Recipe extends Entity
     protected function getCategories(): array
     {
         $categories = $this->attributes['categories'];
-        if (is_string($categories)) {
-            $decoded = json_decode($categories, true);
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                throw new InvalidArgumentException('Invalid JSON format for categories');
-            }
-            return $decoded;
-        }
-        return (array)$categories;
+        return $categories ? explode(',', $categories) : [];
     }
 
     protected function getTags(): array
     {
         $tags = $this->attributes['tags'];
-        if (is_string($tags)) {
-            $decoded = json_decode($tags, true);
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                throw new InvalidArgumentException('Invalid JSON format for tags');
-            }
-            return $decoded;
-        }
-        return (array)$tags;
+        return $tags ? explode(',', $tags) : [];
     }
 
     protected function getIngredients(): array

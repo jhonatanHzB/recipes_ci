@@ -166,8 +166,8 @@ class RecipeModel extends Model
             recipe.protein_unit,
             recipe.fat,
             recipe.fat_unit,
-            CONCAT('[', GROUP_CONCAT(DISTINCT category.id SEPARATOR ', '), ']') as categories,
-            CONCAT('[', GROUP_CONCAT(DISTINCT tag.id SEPARATOR ', '), ']') as tags
+            GROUP_CONCAT(DISTINCT category.id) as categories,
+            GROUP_CONCAT(DISTINCT tag.id) as tags
         ");
         $builder->join('recipe_category', 'recipe_category.recipe_id = recipe.id', 'left');
         $builder->join('category', 'category.id = recipe_category.category_id', 'left');
@@ -182,5 +182,72 @@ class RecipeModel extends Model
     {
         return $this->where('status', 'draft')->findAll();
     }
+
+    public function paginateWithRelations(int $perPage = 10): array {
+        $builder = $this->builder();
+
+        $builder->select('
+            recipe.id,
+            recipe.name,
+            recipe.status,
+            recipe.created_at,
+            recipe.updated_at,
+            GROUP_CONCAT(DISTINCT category.name) as categories,
+            GROUP_CONCAT(DISTINCT tag.name) as tags
+        ');
+
+        $builder->join('recipe_category', 'recipe_category.recipe_id = recipe.id', 'left');
+        $builder->join('category', 'category.id = recipe_category.category_id', 'left');
+        $builder->join('recipe_tag', 'recipe_tag.recipe_id = recipe.id', 'left');
+        $builder->join('tag', 'tag.id = recipe_tag.tag_id', 'left');
+
+        $builder->groupBy('recipe.id');
+        $builder->orderBy('recipe.created_at', 'DESC');
+
+        // Configurar la paginación
+        $this->builder = $builder;
+        return $this->paginate($perPage);
+    }
+
+
+    public function searchRecipes($search = '', $page = 1, $perPage = 10): array
+    {
+        $offset = ($page - 1) * $perPage;
+
+        $builder = $this->builder();
+
+        $builder->select('
+            recipe.id,
+            recipe.name,
+            recipe.status,
+            GROUP_CONCAT(DISTINCT category.name) as categories,
+            GROUP_CONCAT(DISTINCT tag.name) as tags
+        ');
+
+        $builder->join('recipe_category', 'recipe_category.recipe_id = recipe.id', 'left');
+        $builder->join('category', 'category.id = recipe_category.category_id', 'left');
+        $builder->join('recipe_tag', 'recipe_tag.recipe_id = recipe.id', 'left');
+        $builder->join('tag', 'tag.id = recipe_tag.tag_id', 'left');
+
+        $builder->groupStart()
+            ->like('recipe.name', $search, 'both')
+            ->orLike('recipe.description', $search, 'both')
+            ->groupEnd();
+
+        $builder->groupBy('recipe.id');
+        $builder->orderBy('recipe.created_at', 'DESC');
+
+        $builder->limit($perPage, $offset);
+
+        return $builder->get()->getCustomResultObject(Recipe::class);
+    }
+
+    public function countSearchResults($search = ''): int
+    {
+        return $this->like('recipe.name', $search, 'both')
+            ->orLike('recipe.description', $search, 'both')
+            ->countAllResults();
+    }
+
 
 }
