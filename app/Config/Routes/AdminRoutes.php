@@ -9,3 +9,10 @@ $routes->get('recipe/update/(:num)', [App\Modules\Admin\Controllers\RecipeContro
 // Forms
 $routes->post('section/update', [App\Modules\Admin\Controllers\FormController::class, 'updateSection']);
 $routes->post('recipe', [App\Modules\Admin\Controllers\FormController::class, 'createRecipe']);;
+
+// Exportar datos a Excel
+$routes->get('reports/export-categories', [App\Modules\Admin\Controllers\ReportController::class, 'exportCategoriesToExcel']);
+$routes->get('reports/export-recipes-with-categories', [App\Modules\Admin\Controllers\ReportController::class, 'exportRecipesWithCategoryToExcel']);
+$routes->get('reports/export-recipes-without-categories', [App\Modules\Admin\Controllers\ReportController::class, 'exportRecipesWithoutCategoryToExcel']);
+$routes->get('reports/export-tags', [App\Modules\Admin\Controllers\ReportController::class, 'exportTagsToExcel']);
+$routes->get('reports/export-recipes-with-tag', [App\Modules\Admin\Controllers\ReportController::class, 'exportRecipesWithTagToExcel']);

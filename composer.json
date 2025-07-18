@@ -11,8 +11,11 @@
     },
     "require": {
         "php": "^8.1",
+        "ext-gd": "*",
+        "ext-zip": "*",
         "codeigniter4/framework": "^4.0",
-        "codeigniter4/shield": "^1.1"
+        "codeigniter4/shield": "^1.1",
+        "phpoffice/phpspreadsheet": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9",

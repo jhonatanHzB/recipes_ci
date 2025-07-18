@@ -134,9 +134,9 @@
                                class="btn btn-icon btn-sm btn-light bg-transparent rounded-pill"
                                data-bs-toggle="dropdown"><i class="fe fe-more-horizontal"></i></a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="<?= base_url() ?>v1/dashboard/export-categories">Descargar Categorías</a>
-                                <a class="dropdown-item" href="<?= base_url() ?>v1/dashboard/export-recipes-with-categories">Descargar Recetas con Categoria</a>
-                                <a class="dropdown-item" href="<?= base_url() ?>v1/dashboard/export-recipes-without-categories">Descargar Recetas sin Categoria</a>
+                                <a class="dropdown-item" href="<?= base_url('admin/reports/export-categories') ?>">Descargar Categorías</a>
+                                <a class="dropdown-item" href="<?= base_url('admin/reports/export-recipes-with-categories') ?>">Descargar Recetas con Categoria</a>
+                                <a class="dropdown-item" href="<?= base_url('admin/reports/export-recipes-without-categories') ?>">Descargar Recetas sin Categoria</a>
                             </div>
                         </div>
                         <p class="fs-12 text-muted mb-0">
@@ -170,9 +170,8 @@
                                class="btn btn-icon btn-sm btn-light bg-transparent rounded-pill"
                                data-bs-toggle="dropdown"><i class="fe fe-more-horizontal"></i></a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="<?= base_url() ?>v1/dashboard/export-tags">Descargar Etiquetas</a>
-                                <a class="dropdown-item" href="<?= base_url() ?>v1/dashboard/export-recipes-with-tag">Descargar Recetas con Etiquetas</a>
-                                <a class="dropdown-item" href="<?= base_url() ?>v1/dashboard/export-popular-tags">Descargar Etiquetas Populares</a>
+                                <a class="dropdown-item" href="<?= base_url('admin/reports/export-tags') ?>">Descargar Etiquetas</a>
+                                <a class="dropdown-item" href="<?= base_url('admin/reports/export-recipes-with-tag') ?>">Descargar Recetas con Etiquetas</a>
                             </div>
                         </div>
                         <p class="fs-12 text-muted mb-0">
