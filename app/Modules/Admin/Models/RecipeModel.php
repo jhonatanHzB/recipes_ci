@@ -44,18 +44,30 @@ class RecipeModel extends Model
         return 0;
     }
 
-    public function getLastRecipesUpdated(): array
+    public function getRecipesWithRelations($limit = 0, $order = 'ASC', $last_updated = false): array
     {
-        return $this->select('
-            id,
-            name,
-            slug,
-            DATE_FORMAT(created_at, "%d/%m/%Y") as created_at,
-            DATE_FORMAT(updated_at, "%d/%m/%Y") as updated_at
-        ')
-            ->orderBy('recipe.updated_at', 'DESC')
-            ->limit(5)
-            ->get()->getResult();
+        $builder = $this->builder();
+
+        $builder->select('
+            recipe.id,
+            recipe.name,
+            recipe.status,
+            recipe.created_at,
+            recipe.updated_at,
+            GROUP_CONCAT(DISTINCT category.name) as categories,
+            GROUP_CONCAT(DISTINCT tag.name) as tags
+        ');
+
+        $builder->join('recipe_category', 'recipe_category.recipe_id = recipe.id', 'left');
+        $builder->join('category', 'category.id = recipe_category.category_id', 'left');
+        $builder->join('recipe_tag', 'recipe_tag.recipe_id = recipe.id', 'left');
+        $builder->join('tag', 'tag.id = recipe_tag.tag_id', 'left');
+
+        $builder->groupBy('recipe.id');
+        $builder->orderBy($last_updated ? 'recipe.updated_at' : 'recipe.created_at', $order);
+        $builder->limit($limit);
+
+        return $builder->get()->getCustomResultObject(Recipe::class);
     }
 
     public function getCorrectRecipes(): int
@@ -180,7 +192,28 @@ class RecipeModel extends Model
 
     public function getDrafts(): array
     {
-        return $this->where('status', 'draft')->findAll();
+        $builder = $this->builder();
+
+        $builder->select('
+            recipe.id,
+            recipe.name,
+            recipe.status,
+            recipe.created_at,
+            recipe.updated_at,
+            GROUP_CONCAT(DISTINCT category.name) as categories,
+            GROUP_CONCAT(DISTINCT tag.name) as tags
+        ');
+
+        $builder->join('recipe_category', 'recipe_category.recipe_id = recipe.id', 'left');
+        $builder->join('category', 'category.id = recipe_category.category_id', 'left');
+        $builder->join('recipe_tag', 'recipe_tag.recipe_id = recipe.id', 'left');
+        $builder->join('tag', 'tag.id = recipe_tag.tag_id', 'left');
+
+        $builder->groupBy('recipe.id');
+        $builder->where('recipe.status', 'draft');
+        $builder->orderBy('recipe.created_at', 'DESC');
+
+        return $builder->get()->getCustomResultObject(Recipe::class);
     }
 
     public function paginateWithRelations(int $perPage = 10): array {

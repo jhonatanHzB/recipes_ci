@@ -20,4 +20,17 @@ class SectionModel extends Model
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
 
+    public function getSections(): array
+    {
+        $query = $this->select("
+            id,
+            name,
+            slug,
+            DATE_FORMAT(created_at, '%d/%m/%y') as created_at,
+            DATE_FORMAT(updated_at, '%d/%m/%y') as updated_at,
+        ");
+
+        return $query->findAll();
+    }
+
 }

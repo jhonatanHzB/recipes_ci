@@ -69,7 +69,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="mt-0 text-center">
-                                    <span class="text-fixed-white">TOTAL DE CATEGORIAS</span>
+                                    <span class="text-fixed-white">TOTAL CATEGORÍAS</span>
                                     <h3 class="text-fixed-white mb-0"><?= $total_categories ?></h3>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="mt-0 text-center">
-                                    <span class="text-fixed-white">TOTAL DE ETIQUETAS</span>
+                                    <span class="text-fixed-white">TOTAL ETIQUETAS</span>
                                     <h3 class="text-fixed-white mb-0"><?= $total_tags ?></h3>
                                 </div>
                             </div>
@@ -213,8 +213,10 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Título</th>
-                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Categorías</th>
+                                    <th scope="col">Etiquetas</th>
                                     <th scope="col">Acción</th>
                                 </tr>
                                 </thead>
@@ -223,26 +225,31 @@
                                     <tr>
                                         <td><?= $recipe->id ?></td>
                                         <td><?= $recipe->name ?></td>
-                                        <td><?= $recipe->updated_at ?></td>
+                                        <td>
+                                            <span class="badge <?= $recipe->status === 'draft' ? 'bg-warning-transparent' : 'bg-success-transparent' ?>">
+                                                <?= ucfirst($recipe->status) ?>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <?php foreach ($recipe->categories as $category): ?>
+                                                <span class="badge bg-light text-dark me-1"><?= esc($category) ?></span>
+                                            <?php endforeach; ?>
+                                        </td>
+                                        <td>
+                                            <?php foreach ($recipe->tags as $tag): ?>
+                                                <span class="badge bg-info-transparent me-1"><?= esc($tag) ?></span>
+                                            <?php endforeach; ?>
+                                        </td>
                                         <td>
                                             <div class="hstack gap-2 flex-wrap">
-                                                <a
-                                                    href="<?= base_url() ?>recipes/<?= $recipe->id ?>"
-                                                    class="btn btn-primary-light fs-14 lh-1"
-                                                    data-bs-toggle="tooltip"
-                                                    data-bs-placement="top"
-                                                    data-bs-custom-class="tooltip-info"
-                                                    title="Editar receta">
+                                                <a href="<?= base_url('admin/recipe/update/' . $recipe->id) ?>"
+                                                   class="text-primary fs-14 lh-1">
                                                     <i class="ri-edit-line"></i>
                                                 </a>
                                                 <a
                                                     href="<?= base_url() ?>receta/<?= $recipe->slug ?>"
-                                                    class="btn btn-info-light fs-14 lh-1"
-                                                    target="_blank"
-                                                    data-bs-toggle="tooltip"
-                                                    data-bs-placement="top"
-                                                    data-bs-custom-class="tooltip-success"
-                                                    title="Ver receta">
+                                                    class="text-info fs-14 lh-1"
+                                                    target="_blank">
                                                     <i class="ri-eye-line"></i>
                                                 </a>
                                             </div>
@@ -315,11 +322,12 @@
                             <table class="table table-nowrap table-bordered">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Número</th>
-                                    <th scope="col">Título</th>
-                                    <th scope="col">Descripción</th>
-                                    <th scope="col">Dificultad</th>
-                                    <th scope="col">Acciones</th>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Categorías</th>
+                                    <th scope="col">Etiquetas</th>
+                                    <th scope="col">Acción</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -327,28 +335,32 @@
                                     <tr>
                                         <td><?= $recipe->id ?></td>
                                         <td><?= $recipe->name ?></td>
-                                        <td><?= $recipe->description ?></td>
-                                        <td><?= $recipe->difficulty ?></td>
+                                        <td>
+                                            <span class="badge <?= $recipe->status === 'draft' ? 'bg-warning-transparent' : 'bg-success-transparent' ?>">
+                                                <?= ucfirst($recipe->status) ?>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <?php foreach ($recipe->categories as $category): ?>
+                                                <span class="badge bg-light text-dark me-1"><?= esc($category) ?></span>
+                                            <?php endforeach; ?>
+                                        </td>
+                                        <td>
+                                            <?php foreach ($recipe->tags as $tag): ?>
+                                                <span class="badge bg-info-transparent me-1"><?= esc($tag) ?></span>
+                                            <?php endforeach; ?>
+                                        </td>
                                         <td>
                                             <div class="hstack gap-2 flex-wrap">
-                                                <a
-                                                    href="<?= base_url() ?>admin/recipe/update/<?= $recipe->id ?>"
-                                                    class="btn btn-primary-light fs-14 lh-1"
-                                                    data-bs-toggle="tooltip"
-                                                    data-bs-placement="top"
-                                                    data-bs-custom-class="tooltip-info"
-                                                    title="Editar receta">
+                                                <a href="<?= base_url() ?>admin/recipe/update/<?= $recipe->id ?>"
+                                                   class="text-info fs-14 lh-1">
                                                     <i class="ri-edit-line"></i>
                                                 </a>
-                                                <button
-                                                    type="button"
-                                                    class="btn btn-danger-light fs-14 lh-1"
-                                                    data-bs-toggle="tooltip"
-                                                    data-bs-placement="top"
-                                                    data-bs-custom-class="tooltip-danger"
-                                                    title="Eliminar">
-                                                    <i class="ri-delete-bin-7-line"></i>
-                                                </button>
+                                                <a href="javascript:void(0);"
+                                                   class="text-danger fs-14 lh-1 delete-recipe"
+                                                   data-recipe-id="<?= $recipe->id ?>">
+                                                    <i class="ri-delete-bin-5-line"></i>
+                                                </a>
                                             </div>
                                         </td>
                                     </tr>

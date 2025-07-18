@@ -39,7 +39,7 @@
                                         <th scope="col">Status</th>
                                         <th scope="col">Categorías</th>
                                         <th scope="col">Etiquetas</th>
-                                        <th scope="col">Acciones</th>
+                                        <th scope="col">Acción</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -64,7 +64,7 @@
                                             </td>
                                             <td>
                                                 <div class="hstack gap-2 flex-wrap">
-                                                    <a href="<?= base_url('admin/recipe/update/' . $recipe->id) ?>"
+                                                    <a href="<?= base_url() ?>admin/recipe/update/<?= $recipe->id ?>"
                                                        class="text-info fs-14 lh-1">
                                                         <i class="ri-edit-line"></i>
                                                     </a>

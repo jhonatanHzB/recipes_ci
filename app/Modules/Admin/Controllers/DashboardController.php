@@ -37,8 +37,8 @@ class DashboardController extends BaseController
             'total_tags' => $this->tagModel->countAllResults(),
             'recipes_with_tag' => $this->recipeModel->getRecipesWithTags(),
             'recipes_without_category' => $this->recipeModel->getRecipesWithoutCategories(),
-            'last_recipes_updated' => $this->recipeModel->getLastRecipesUpdated(),
-            'sections' => $this->sectionModel->findAll(),
+            'last_recipes_updated' => $this->recipeModel->getRecipesWithRelations(5, 'DESC', true),
+            'sections' => $this->sectionModel->getSections(),
             'draft_recipes' => $this->recipeModel->getDrafts(),
 
             'categories_chart' => [
