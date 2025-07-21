@@ -3,8 +3,8 @@
 namespace App\Cells;
 
 use App\Models\MenuTypeModel;
-use CodeIgniter\View\Cells\Cell;
 use App\Models\SectionModel;
+use CodeIgniter\View\Cells\Cell;
 
 class SidebarCell extends Cell
 {
