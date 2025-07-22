@@ -1,0 +1,52 @@
+<div class="container-fluid">
+    <div class="row mt-md-10">
+        <div class="col-12 gx-0" data-aos="fade-up">
+            <p class="fw-bold popular_title_section mb-3 kalam">
+                <?= $section->section_name ?? ''; ?>
+            </p>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <?php if (is_array($populars) && count($populars) > 0) { ?>
+            <?php foreach ($populars as $popular) { ?>
+                <!-- Row card -->
+                <div class="col-12 col-md-6 g-2 d-flex align-items-stretch mb-5" data-aos="fade-up" >
+                    <!-- Card -->
+                    <a class=" card shadow-light-lg mb-7 mb-md-0"
+                       href="<?= base_url(); ?>receta/<?= $popular->recipe_slug; ?>">
+
+                        <!-- Image -->
+                        <div class="card-zoom popular_img" style="
+                            background-image: url('<?= base_url(); ?>assets/img/recipes/<?= $popular->recipe_image; ?>');
+                            ">
+                        </div>
+
+                        <!-- Body -->
+                        <div class="card-body px-md-3 py-md-4">
+
+                            <!-- Shape -->
+                            <div class="shape shape-bottom-100 shape-fluid-x text-white">
+                                <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0 48h2880V0h-720C1442.5 52 720 0 720 0H0v48z" fill="currentColor" />
+                                </svg>
+                            </div>
+
+                            <!-- Stars points -->
+                            <div class="popular_content_stars">
+                                <?= $popular->getRating($popular->recipe_rating); ?>
+                            </div>
+
+                            <!-- Heading -->
+                            <h4 class="popular_recipe_title mt-2"><?= $popular->recipe_title; ?></h4>
+
+                        </div>
+
+                    </a>
+                </div>
+
+            <?php } ?>
+        <?php } ?>
+    </div>
+</div>

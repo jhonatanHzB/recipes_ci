@@ -5,29 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="<?= base_url(); ?>favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="<?= base_url('favicon.ico'); ?>" type="image/x-icon">
 
     <!-- Libs CSS -->
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/libs.bundle.css">
+    <link rel="stylesheet" href="<?= base_url('assets/css/libs.bundle.css'); ?>" />
 
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/theme.bundle.css">
+    <link rel="stylesheet" href="<?= base_url('assets/css/theme.bundle.css'); ?>" />
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" />
 
     <!-- Personal styles -->
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/styles.css?v=1.0">
+    <link rel="stylesheet" href="<?= base_url('assets/css/styles.css?v=1.0'); ?>" />
 
     <!-- Animate CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
     <!-- Slick Carousel -->
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/slick.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/slick-theme.css">
-
-    <!-- JQuery -->
-    <script src="<?= base_url(); ?>assets/js/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/slick.css" />
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/slick-theme.css" />
 
     <!-- Title -->
     <title>Chef Ana Paula</title>
@@ -50,19 +47,19 @@
         <div class="row align-items-center justify-content-center">
             <div class="col-lg-2 col-md-3 px-0">
                 <a href="<?= base_url(); ?>">
-                    <img class="img-fluid" src="<?= base_url(); ?>assets/img/logo_chef.svg" alt="Chef Ana Paula">
+                    <img class="img-fluid" src="<?= base_url('assets/img/logo_chef.svg'); ?>" alt="Chef Ana Paula">
                 </a>
             </div>
             <div class="col-lg-10 col-md-12">
                 <ul class="navbar-nav ms-auto">
 
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="<?= base_url(); ?>recetas">Recetario</a>
+                        <a class="nav-link" aria-current="page" href="<?= base_url('recetas'); ?>">Recetario</a>
                     </li>
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarPages" data-bs-toggle="dropdown"
-                           href="<?= base_url(); ?>recetas" aria-haspopup="true" aria-expanded="false">
+                           href="<?= base_url('recetas'); ?>" aria-haspopup="true" aria-expanded="false">
                             Recetas
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg" aria-labelledby="navbarPages">
@@ -113,15 +110,15 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="<?= base_url(); ?>videos">Videos</a>
+                        <a class="nav-link" aria-current="page" href="<?= base_url('videos'); ?>">Videos</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="<?= base_url(); ?>chef-ana-paula">Sobre mi</a>
+                        <a class="nav-link" aria-current="page" href="<?= base_url('chef-ana-paula'); ?>">Sobre mi</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="<?= base_url(); ?>contacto">Contacto</a>
+                        <a class="nav-link" aria-current="page" href="<?= base_url('contacto'); ?>">Contacto</a>
                     </li>
 
                     <li class="nav-item">
@@ -169,7 +166,7 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarPages" data-bs-toggle="dropdown"
-                       href="<?= base_url(); ?>recetas" aria-haspopup="true" aria-expanded="false">
+                       href="<?= base_url('recetas'); ?>" aria-haspopup="true" aria-expanded="false">
                         Recetas
                     </a>
 
@@ -221,15 +218,15 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="<?= base_url(); ?>recetas">Recetario</a>
+                    <a class="nav-link" aria-current="page" href="<?= base_url('recetas'); ?>">Recetario</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="<?= base_url(); ?>videos">Videos</a>
+                    <a class="nav-link" aria-current="page" href="<?= base_url('videos'); ?>">Videos</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="<?= base_url(); ?>chef-ana-paula">Todo sobre mi</a>
+                    <a class="nav-link" aria-current="page" href="<?= base_url('chef-ana-paula'); ?>">Todo sobre mi</a>
                 </li>
 
             </ul>
@@ -248,7 +245,7 @@
 <?= $this->renderSection('content'); ?>
 
 <!-- SearchModal -->
-<?= view_cell('App\Cells\SearchModalCell'); ?>
+
 
 <!-- FOOTER -->
 <footer class="mt-10 py-8 py-md-11 bg-gray-200">
@@ -257,7 +254,7 @@
             <div class="col-12 col-md-4 col-lg-3">
 
                 <!-- Brand -->
-                <img src="<?= base_url(); ?>assets/img/chef_ana_paula_logo.png" alt="Yommi"
+                <img src="<?= base_url('assets/img/chef_ana_paula_logo.png'); ?>" alt="Yommi"
                      class="footer-brand img-fluid mb-2 w-100">
 
 
@@ -316,22 +313,22 @@
                         </a>
                     </li>
                     <li class="mb-3">
-                        <a href="<?= base_url(); ?>recetas" class="text-reset">
+                        <a href="<?= base_url('recetas'); ?>" class="text-reset">
                             Recetario
                         </a>
                     </li>
                     <li class="mb-3">
-                        <a href="<?= base_url(); ?>videos" class="text-reset">
+                        <a href="<?= base_url('videos'); ?>" class="text-reset">
                             Videos
                         </a>
                     </li>
                     <li class="mb-3">
-                        <a href="<?= base_url(); ?>chef-ana-paula" class="text-reset">
+                        <a href="<?= base_url('chef-ana-paula'); ?>" class="text-reset">
                             Todo sobre mi
                         </a>
                     </li>
                     <li>
-                        <a href="<?= base_url(); ?>contacto" class="text-reset">
+                        <a href="<?= base_url('contacto'); ?>" class="text-reset">
                             Contacto
                         </a>
                     </li>
@@ -348,32 +345,32 @@
                 <!-- List -->
                 <ul class="list-unstyled text-body-secondary mb-6 mb-md-8 mb-lg-0">
                     <li class="mb-3">
-                        <a href="<?= base_url(); ?>recetas/desayunos" class="text-reset">
+                        <a href="<?= base_url('recetas/desayunos'); ?>" class="text-reset">
                             Desayunos
                         </a>
                     </li>
                     <li class="mb-3">
-                        <a href="<?= base_url(); ?>recetas/botanas" class="text-reset">
+                        <a href="<?= base_url('recetas/botanas'); ?>" class="text-reset">
                             Botanas
                         </a>
                     </li>
                     <li class="mb-3">
-                        <a href="<?= base_url(); ?>recetas/bebidas" class="text-reset">
+                        <a href="<?= base_url('recetas/bebidas'); ?>" class="text-reset">
                             Bebidas
                         </a>
                     </li>
                     <li class="mb-3">
-                        <a href="<?= base_url(); ?>recetas/sopas-cremas" class="text-reset">
+                        <a href="<?= base_url('recetas/sopas-cremas'); ?>" class="text-reset">
                             Sopas/Cremas
                         </a>
                     </li>
                     <li class="mb-3">
-                        <a href="<?= base_url(); ?>recetas/entradas" class="text-reset">
+                        <a href="<?= base_url('recetas/entradas'); ?>" class="text-reset">
                             Entradas
                         </a>
                     </li>
                     <li>
-                        <a href="<?= base_url(); ?>recetas/guarniciones-ensaladas" class="text-reset">
+                        <a href="<?= base_url('recetas/guarniciones-ensaladas'); ?>" class="text-reset">
                             Guarniciones/Ensaladas
                         </a>
                     </li>
@@ -385,28 +382,28 @@
                 <!-- Heading -->
                 <h6 class="fw-bold text-uppercase text-gray-700">
                     <!-- &#160; -->
-                    Categorias
+                    Categorías
                 </h6>
 
                 <!-- List -->
                 <ul class="list-unstyled text-body-secondary mb-0">
                     <li class="mb-3">
-                        <a href="<?= base_url(); ?>recetas/pastas-arroces" class="text-reset">
+                        <a href="<?= base_url('recetas/pastas-arroces'); ?>" class="text-reset">
                             Pastas/Arroces
                         </a>
                     </li>
                     <li class="mb-3">
-                        <a href="<?= base_url(); ?>recetas/plato-principal" class="text-reset">
+                        <a href="<?= base_url('recetas/plato-principal'); ?>" class="text-reset">
                             Plato principal
                         </a>
                     </li>
                     <li class="mb-3">
-                        <a href="<?= base_url(); ?>recetas/postres" class="text-reset">
+                        <a href="<?= base_url('recetas/postres'); ?>" class="text-reset">
                             Postres
                         </a>
                     </li>
                     <li>
-                        <a href="<?= base_url(); ?>recetas" class="text-reset">
+                        <a href="<?= base_url('recetas'); ?>" class="text-reset">
                             Recetario completo
                         </a>
                     </li>
@@ -423,7 +420,7 @@
                 <!-- List -->
                 <ul class="list-unstyled text-body-secondary mb-0">
                     <li class="mb-3">
-                        <a href="<?= base_url(); ?>aviso-de-privacidad" class="text-reset">
+                        <a href="<?= base_url('aviso-de-privacidad'); ?>" class="text-reset">
                             Aviso de Privacidad
                         </a>
                     </li>
@@ -437,12 +434,12 @@
 <!-- JAVASCRIPT -->
 
 <!-- Vendor JS -->
-<script src="<?= base_url(); ?>assets/js/vendor.bundle.js?v=1.0"></script>
+<script src="<?= base_url('assets/js/vendor.bundle.js?v=1.0'); ?>"></script>
 
 <!-- Theme JS -->
-<script src="<?= base_url(); ?>assets/js/theme.bundle.js?v=1.0"></script>
+<script src="<?= base_url('assets/js/theme.bundle.js?v=1.0'); ?>"></script>
 
-<script src="<?= base_url(); ?>assets/js/loader.js"></script>
+<script src="<?= base_url('assets/js/loader.js'); ?>"></script>
 
 </body>
 
