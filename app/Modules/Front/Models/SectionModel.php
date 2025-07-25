@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Modules\Front\Models;
 
 use CodeIgniter\Model;
 
@@ -19,4 +19,5 @@ class SectionModel extends Model
     protected $dateFormat = 'datetime';
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
+
 }

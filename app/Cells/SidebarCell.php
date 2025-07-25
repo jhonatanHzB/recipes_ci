@@ -2,8 +2,8 @@
 
 namespace App\Cells;
 
-use App\Models\MenuTypeModel;
-use App\Models\SectionModel;
+use App\Modules\Admin\Models\MenuTypeModel;
+use App\Modules\Front\Models\SectionModel;
 use CodeIgniter\View\Cells\Cell;
 
 class SidebarCell extends Cell

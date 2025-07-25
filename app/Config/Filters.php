@@ -34,6 +34,7 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
+        'session'       => \CodeIgniter\Shield\Filters\SessionAuth::class,
     ];
 
     /**
@@ -72,7 +73,7 @@ class Filters extends BaseFilters
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
-            'session' => ['except' => ['', 'login*', 'register', 'auth/a/*', 'logout']],
+            // 'session' => ['except' => ['', 'login*', 'register', 'auth/a/*', 'logout']],
         ],
         'after' => [
             // 'honeypot',
@@ -104,5 +105,11 @@ class Filters extends BaseFilters
      *
      * @var array<string, array<string, list<string>>>
      */
-    public array $filters = [];
+    public array $filters = [
+        'session' => [
+            'before' => [
+                'admin/*',  // Protege todas las rutas que empiecen con admin/
+            ]
+        ],
+    ];
 }

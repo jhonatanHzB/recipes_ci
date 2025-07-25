@@ -8,15 +8,15 @@ class TimeHelper
 {
     /**
      * Convierte tiempo en formato HH:MM a minutos totales
-     * @param string $time Tiempo en formato "H:MM"
+     * @param string $time Tiempo en formato "HH:MM"
      * @return int Minutos totales
      * @throws InvalidArgumentException si el formato es inválido
      */
     public function timeToMinutes(string $time): int
     {
-        // Validar el formato
-        if (!preg_match('/^(\d+):([0-5]\d)$/', $time, $matches)) {
-            throw new InvalidArgumentException('Formato de tiempo inválido. Use H:MM (ejemplo: 1:05, 2:15)');
+        // Validar el formato (ahora acepta 00:MM)
+        if (!preg_match('/^([0-9]{2}):([0-5][0-9])$/', $time, $matches)) {
+            throw new InvalidArgumentException('Formato de tiempo inválido. Use HH:MM (ejemplo: 00:30, 01:45)');
         }
 
         $hours = (int) $matches[1];
@@ -28,7 +28,7 @@ class TimeHelper
     /**
      * Convierte minutos totales a formato HH:MM
      * @param int $minutes Minutos totales
-     * @return string Tiempo en formato "H:MM"
+     * @return string Tiempo en formato "HH:MM"
      * @throws InvalidArgumentException si los minutos son negativos
      */
     public function minutesToTime(int $minutes): string
@@ -40,7 +40,7 @@ class TimeHelper
         $hours = floor($minutes / 60);
         $mins = $minutes % 60;
 
-        return sprintf('%d:%02d', $hours, $mins);
+        return sprintf('%02d:%02d', $hours, $mins);
     }
 
     /**
@@ -51,11 +51,16 @@ class TimeHelper
      */
     public function formatTime(int $hour, int $minute): string
     {
-        $hour = intval($hour);
-        if ($hour < 1) {
-            return (string)$minute;
-        } else {
-            return sprintf('%d:%02d', $hour, $minute);
-        }
+        return sprintf('%02d:%02d', $hour, $minute);
+    }
+
+    /**
+     * Verifica si el tiempo es cero o vacío
+     * @param string $time Tiempo en formato "HH:MM"
+     * @return bool
+     */
+    public function isEmptyTime(string $time): bool
+    {
+        return $time === '00:00' || empty($time);
     }
 }

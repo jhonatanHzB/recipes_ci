@@ -23,8 +23,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
     <!-- Slick Carousel -->
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/slick.css" />
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/slick-theme.css" />
+    <link rel="stylesheet" href="<?= base_url('assets/css/slick.css'); ?>" />
+    <link rel="stylesheet" href="<?= base_url('assets/css/slick-theme.css'); ?>" />
+
+    <!-- JQuery -->
+    <script src="<?= base_url('assets/js/jquery-3.7.1.min.js'); ?>"></script>
 
     <!-- Title -->
     <title>Chef Ana Paula</title>
@@ -245,6 +248,7 @@
 <?= $this->renderSection('content'); ?>
 
 <!-- SearchModal -->
+<?= view_cell('App\Cells\SearchModalCell'); ?>
 
 
 <!-- FOOTER -->
@@ -439,7 +443,10 @@
 <!-- Theme JS -->
 <script src="<?= base_url('assets/js/theme.bundle.js?v=1.0'); ?>"></script>
 
-<script src="<?= base_url('assets/js/loader.js'); ?>"></script>
+<!--<script src="--><?php //= base_url('assets/js/loader.js'); ?><!--"></script>-->
+
+<!-- App JS -->
+<script src="<?= base_url('assets/js/app-min.js'); ?>"></script>
 
 </body>
 

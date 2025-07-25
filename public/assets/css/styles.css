@@ -20,7 +20,8 @@ html {
 
 /* Main banner */
 .main-banner {
-    background-color: #aa2e3c;
+    background: linear-gradient(to left,#efa65f,#f76a2d);
+    line-height: 1rem;
 }
 
 /* Navbar styles */
@@ -40,7 +41,7 @@ html {
 /* General styles */
 .season_img,
 .recent_img,
-.popular_img,
+.section_img,
 .video_img,
 .healthy_img {
     background-size: cover;
@@ -50,7 +51,7 @@ html {
 
 .season_img:hover,
 .recent_img:hover,
-.popular_img:hover,
+.section_img:hover,
 .video_img:hover,
 .healthy_img:hover,
 .category_img:hover {
@@ -120,26 +121,26 @@ html {
 }
 
 /* Styles for popular recipes */
-.popular_title_section {
+.section_title {
     font-size: 3.125rem;
 }
 
 @media screen and (min-width: 768px) {
-    .popular_title_section {
+    .section_title {
         font-size: 2rem;
     }
 }
 
-.popular_img {
+.section_img {
     height: 150px;
 }
 
 @media screen and (min-width: 768px) {
-    .popular_content_stars {
+    .section_content_stars {
         font-size: .8rem;
     }
 
-    .popular_recipe_title {
+    .section_recipe_title {
         font-size: .8rem;
     }
 }

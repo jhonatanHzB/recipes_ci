@@ -39,13 +39,16 @@ function sendForm(formData) {
     axios
         .post(`${baseURL}admin/recipe`, formData)
         .then((response) => {
-            console.log(response);
             if (!response.data.success) {
-                Swal.fire(
-                    `${response.data.message}!`,
-                    "",
-                    "error",
-                );
+                const errorMessages = Object.entries(response.data.errors)
+                    .map(([campo, mensaje]) => `<strong>${campo}:</strong> ${mensaje}`)
+                    .join('<br>');
+
+                Swal.fire({
+                    title: 'No se pudo guardar la receta',
+                    html: errorMessages,
+                    icon: "error",
+                });
             }
 
             if (response.data.success) {
@@ -132,4 +135,17 @@ function createDateInputs(times) {
         step: 5,
         initialValue: r_min,
     });
+}
+
+function downloadImage(url, fileName) {
+    fetch(url)
+        .then(response => response.blob())
+        .then(blob => {
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = fileName;
+            link.click();
+            window.URL.revokeObjectURL(link.href);
+        })
+        .catch(error => console.error('Error al descargar la imagen:', error));
 }

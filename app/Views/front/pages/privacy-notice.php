@@ -233,7 +233,7 @@
         </div>
         <div class="col-12 col-md-4">
             <?= $this->include('front/sections/chef_sidebar.php'); ?>
-            <?= view_cell('App\Cells\PopularCell'); ?>
+            <?= view_cell('App\Cells\SectionCell::renderFirstSection', 'section=1'); ?>
         </div>
 
     </div>

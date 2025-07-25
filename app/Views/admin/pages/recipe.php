@@ -20,7 +20,7 @@
             <div class="d-flex my-xl-auto right-content align-items-center">
                 <div class="pe-1 mb-xl-0 mx-4">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="draftSwitch" checked />
+                        <input class="form-check-input" type="checkbox" role="switch" id="draftSwitch" <?= isset($recipe->status) && $recipe->status === "draft" ? "checked" : "" ?> />
                         <label class="form-check-label" for="saveDraft">Borrador</label>
                     </div>
                 </div>
@@ -75,6 +75,15 @@
                                             : "Seleccione una imagen para la receta" ?>
 
                                     </small>
+
+                                    <?php if (isset($recipe->image)): ?>
+                                        <a href="#"
+                                           class="btn btn-primary d-block mt-4"
+                                           onclick="downloadImage('<?= base_url('assets/img/recipes/' . $recipe->image) ?>', '<?= $recipe->image ?>')">
+                                            <i class="fas fa-download me-2"></i>Descargar imagen actual
+                                        </a>
+                                    <?php endif; ?>
+
                                 </div>
                             </div>
 
@@ -82,6 +91,12 @@
                                 Editor de imágenes para aspecto 16:9
                                 <a class="text-info" target="_blank"
                                     href="https://www.iloveimg.com/es/editor-de-fotos">Editor</a>
+                            </p>
+
+                            <p class="text-muted d-block mb-2">
+                                Editor de imágenes para cambiar a resolución de 1280*720
+                                <a class="text-info" target="_blank"
+                                   href="https://www.iloveimg.com/es/redimensionar-imagen">Redimensionado</a>
                             </p>
 
                             <p class="text-muted d-block mb-4">
@@ -450,7 +465,7 @@
         ];
         setNutritionalUnits(units);
 
-        quill.root.innerHTML = "<?= $recipe->description ?? "" ?>";
+        quill.root.innerHTML = '<?= $recipe->description ?? '' ?>';
     });
 </script>
 

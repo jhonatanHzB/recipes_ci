@@ -12,7 +12,10 @@ $routes->group('', ['namespace' => 'App\Modules\Front\Controllers'], static func
 });
 
 // Rutas del Backend
-$routes->group('admin', ['namespace' => 'App\Modules\Admin\Controllers'], static function ($routes) {
+$routes->group('admin', [
+    'namespace' => 'App\Modules\Admin\Controllers',
+    'filter' => 'session'  // Aplicamos el filtro de autenticación
+], static function ($routes) {
     require __DIR__ . '/Routes/AdminRoutes.php';
 });
 

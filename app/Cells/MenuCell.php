@@ -29,7 +29,7 @@ class MenuCell extends Cell
     public function renderSeasonalMenu(): string
     {
         $data = [
-            'menus' => $this->menuModel->where('id', 1)->findAll(),
+            'menus' => $this->menuModel->where('menu_type_id', 1)->findAll(),
         ];
 
         return $this->view('../Views/front/components/navbar/seasonal_menu', $data);
@@ -38,7 +38,7 @@ class MenuCell extends Cell
     public function renderHolidayMenu(): string
     {
         $data = [
-            'menus' => $this->menuModel->where('id', 2)->findAll(),
+            'menus' => $this->menuModel->where('menu_type_id', 2)->findAll(),
         ];
 
         return $this->view('../Views/front/components/navbar/holiday_menu', $data);

@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Models;
+namespace App\Modules\Front\Models;
 
 use CodeIgniter\Model;
 
-class MenuModel extends Model
+class TagModel extends Model
 {
 
-    protected $table = 'menu';
+    protected $table = 'tag';
     protected $primaryKey = 'id';
     protected $returnType = 'object';
-    protected $allowedFields = ['name', 'slug', 'image', 'position'];
+    protected $allowedFields = ['name', 'count'];
     protected bool $updateOnlyChanged = true;
     protected $useSoftDeletes = false;
 
@@ -19,4 +19,5 @@ class MenuModel extends Model
     protected $dateFormat = 'datetime';
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
+
 }

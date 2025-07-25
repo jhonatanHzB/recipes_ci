@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Modules\Admin\Models;
 
 use CodeIgniter\Model;
 

@@ -1,26 +1,26 @@
 <div class="container-fluid">
     <div class="row mt-md-10">
         <div class="col-12 gx-0" data-aos="fade-up">
-            <p class="fw-bold popular_title_section mb-3 kalam">
-                <?= $section->section_name ?? ''; ?>
+            <p class="fw-bold section_title mb-3 kalam">
+                <?= $section_name->name ?? ''; ?>
             </p>
             <hr>
         </div>
     </div>
 
     <div class="row">
-        <?php if (is_array($populars) && count($populars) > 0) { ?>
-            <?php foreach ($populars as $popular) { ?>
+        <?php if (is_array($recipes) && count($recipes) > 0) { ?>
+            <?php foreach ($recipes as $recipe) { ?>
                 <!-- Row card -->
                 <div class="col-12 col-md-6 g-2 d-flex align-items-stretch mb-5" data-aos="fade-up" >
                     <!-- Card -->
                     <a class=" card shadow-light-lg mb-7 mb-md-0"
-                       href="<?= base_url(); ?>receta/<?= $popular->recipe_slug; ?>">
+                       href="<?= base_url('receta/'); ?><?= $recipe->slug; ?>">
 
                         <!-- Image -->
-                        <div class="card-zoom popular_img" style="
-                            background-image: url('<?= base_url(); ?>assets/img/recipes/<?= $popular->recipe_image; ?>');
-                            ">
+                        <div class="card-zoom section_img" style="
+                                background-image: url('<?= base_url('assets/img/recipes/'); ?><?= $recipe->image; ?>');
+                                ">
                         </div>
 
                         <!-- Body -->
@@ -34,12 +34,12 @@
                             </div>
 
                             <!-- Stars points -->
-                            <div class="popular_content_stars">
-                                <?= $popular->getRating($popular->recipe_rating); ?>
+                            <div class="section_content_stars">
+                                <?= $recipe->generateRatingStars(); ?>
                             </div>
 
                             <!-- Heading -->
-                            <h4 class="popular_recipe_title mt-2"><?= $popular->recipe_title; ?></h4>
+                            <h4 class="section_recipe_title mt-2"><?= $recipe->name; ?></h4>
 
                         </div>
 

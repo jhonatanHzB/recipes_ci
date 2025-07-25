@@ -34,6 +34,7 @@ class Recipe extends Entity
         'fat_unit ' => null,
         'categories' => null,
         'tags' => null,
+        'rating' => null,
     ];
 
     protected function getCategories(): array
@@ -96,4 +97,41 @@ class Recipe extends Entity
         $this->attributes['refrigeration'] = $formatTime;
         return $this;
     }
+
+    public function getDifficultyIcon(): ?string
+    {
+        $difficulty = $this->difficulty;
+        return match ($difficulty) {
+            'fácil'   => '<i class="fas fa-thermometer-quarter mr-1"></i>',
+            'medio'   => '<i class="fas fa-thermometer-half mr-1"></i>',
+            'difícil' => '<i class="fas fa-thermometer-full mr-1"></i>',
+        };
+    }
+
+    public function generateRatingStars(): string
+    {
+        $totalStars = 5;
+        $stars = '';
+
+        for ($i = 0; $i < $totalStars; $i++) {
+            $rating = $i + 1;
+            $isSelected = !is_null($this->rating) && $i < $this->rating;
+
+            $starClass = $isSelected ? 'star star-selected' : 'star';
+            $stars .= $this->createStarElement($rating, $starClass);
+        }
+
+        return $stars;
+    }
+
+    private function createStarElement(int $rating, string $starClass): string
+    {
+        return sprintf(
+            "<i class='fas fa-star %s' data-rating='%d' data-recipe='%d'></i>",
+            $starClass,
+            $rating,
+            $this->id
+        );
+    }
+
 }
