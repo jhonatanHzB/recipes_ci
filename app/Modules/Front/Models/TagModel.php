@@ -20,4 +20,13 @@ class TagModel extends Model
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
 
+    public function getTagsOfRecipe($id): array
+    {
+        $builder = $this->builder();
+        $builder->select('tag.name');
+        $builder->join('recipe_tag', 'recipe_tag.tag_id = tag.id');
+        $builder->where('recipe_tag.recipe_id', $id);
+        return $builder->get()->getResult();
+    }
+
 }

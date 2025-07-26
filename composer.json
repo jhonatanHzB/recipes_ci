@@ -15,7 +15,8 @@
         "ext-zip": "*",
         "codeigniter4/framework": "^4.0",
         "codeigniter4/shield": "^1.1",
-        "phpoffice/phpspreadsheet": "*"
+        "phpoffice/phpspreadsheet": "*",
+      "ext-mbstring": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9",

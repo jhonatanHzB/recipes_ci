@@ -33,7 +33,7 @@
                             <!-- Heading -->
                             <div class="d-flex justify-content-between">
                                 <p class="h6">
-                                    <?php //$recipe->getDifficultyIcon($recipe->difficulty); ?>
+                                    <?= $recipe->getDifficultyIcon(); ?>
                                     <?= $recipe->difficulty; ?>
                                 </p>
                                 <p class="h6">
