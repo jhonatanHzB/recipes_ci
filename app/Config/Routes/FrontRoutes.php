@@ -3,6 +3,9 @@
 $routes->get('/', [App\Modules\Front\Controllers\Home::class, 'index']);
 $routes->get('receta/(:any)', [App\Modules\Front\Controllers\RecipeController::class, 'index']);
 $routes->get('aviso-de-privacidad', [App\Modules\Front\Controllers\Home::class, 'privacyNotice']);
+$routes->get('videos', [App\Modules\Front\Controllers\MediaController::class, 'index']);
+$routes->get('chef-ana-paula', [App\Modules\Front\Controllers\Home::class, 'aboutMe']);
+$routes->get('contacto', [App\Modules\Front\Controllers\ContactController::class, 'index']);
 
 // Endpoints
 $routes->get('api/carousel', [App\Modules\Front\Controllers\CarouselController::class, 'getCarouselItems']);

@@ -19,4 +19,13 @@ class Home extends BaseController
 
         return view('front/pages/privacy-notice', $data);
     }
+
+    public function aboutMe(): string {
+        $data = [
+            'location' => 'Home',
+            'page'     => 'Todo sobre mí',
+        ];
+
+        return view('front/pages/about-me', $data);
+    }
 }
