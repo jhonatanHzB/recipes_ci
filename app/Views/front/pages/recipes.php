@@ -41,7 +41,7 @@
                 <div class="d-block col-6 col-md-4 px-3 mb-5" data-aos="fade-up" id="seasonal-menu-container">
                     <a href="javascript:void(0)" onclick="showExtraMenu(1)">
                         <img
-                            src="<?php base_url('assets/img/categories/temporada.jpg'); ?>"
+                            src="<?php base_url(); ?>assets/img/categories/temporada.jpg"
                             class="img-fluid category_img"
                             alt="Temporada"
                         />
@@ -51,7 +51,7 @@
                 <div class="d-block col-6 col-md-4 px-3 mb-5" data-aos="fade-up" id="holiday-menu-container">
                     <a href="javascript:void(0)" onclick="showExtraMenu(2)">
                         <img
-                            src="<?php base_url('assets/img/categories/dia_festivo.jpg'); ?>"
+                            src="<?php base_url(); ?>assets/img/categories/dia_festivo.jpg"
                             class="img-fluid category_img"
                             alt="Día Festivo"
                         />
