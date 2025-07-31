@@ -20,4 +20,9 @@ class CategoryModel extends Model
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
 
+    public function getCategoryBySlug($slug)
+    {
+        return $this->where('slug', $slug)->first();
+    }
+
 }

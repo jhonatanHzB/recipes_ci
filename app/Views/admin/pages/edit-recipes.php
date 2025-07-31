@@ -70,7 +70,7 @@
                                                     </a>
                                                     <a href="javascript:void(0);"
                                                        class="text-danger fs-14 lh-1 delete-recipe"
-                                                       data-recipe-id="<?= $recipe->id ?>">
+                                                       onclick="deleteRecipe(<?= $recipe->id ?>)">
                                                         <i class="ri-delete-bin-5-line"></i>
                                                     </a>
                                                 </div>
@@ -110,175 +110,216 @@
         let timeoutId;
         let currentPage = 1;
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const searchInput = document.getElementById('recipe');
-            const tableBody = document.querySelector('.table tbody');
-            const paginationContainer = document.querySelector('.pagination-style-1');
+        const searchInput = document.getElementById('recipe');
+        const tableBody = document.querySelector('.table tbody');
+        const paginationContainer = document.querySelector('.pagination-style-1');
 
-            searchInput.addEventListener('input', function() {
-                clearTimeout(timeoutId);
-                timeoutId = setTimeout(() => {
-                    currentPage = 1;
-                    searchRecipes();
-                }, 500);
-            });
-
-            async function searchRecipes() {
-                const searchTerm = searchInput.value;
-                const url = new URL('<?= base_url('admin/recipe/search') ?>');
-                url.searchParams.append('search', searchTerm);
-                url.searchParams.append('page', currentPage);
-
-                try {
-                    const response = await fetch(url, {
-                        method: 'GET',
-                        headers: {
-                            'Accept': 'application/json',
-                            'X-Requested-With': 'XMLHttpRequest'
-                        }
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`Error HTTP: ${response.status}`);
-                    }
-
-                    const data = await response.json();
-
-                    if (data && data.recipes) {
-                        updateTable(data.recipes);
-                        updatePagination(data.currentPage, data.totalPages);
-                    } else {
-                        throw new Error('Formato de respuesta inválido');
-                    }
-                } catch (error) {
-                    console.error('Error en la búsqueda:', error);
-
-                    let errorMessage = 'Ocurrió un error al buscar las recetas';
-                    if (error.message.includes('HTTP')) {
-                        errorMessage = `Error del servidor: ${error.message}`;
-                    } else if (error.name === 'TypeError') {
-                        errorMessage = 'No se pudo conectar con el servidor';
-                    }
-
-                    Swal.fire('Error', errorMessage, 'error');
-                }
-            }
-
-            function updateTable(recipes) {
-                //tableBody.empty();
-
-                if (!recipes.length) {
-                    tableBody.innerHTML = `
-                        <tr>
-                            <td colspan="4" class="text-center">No se encontraron recetas</td>
-                        </tr>
-                    `;
-                    return;
-                }
-
-                tableBody.innerHTML = recipes.map(recipe => `
-                    <tr>
-                        <th scope="row">${recipe.id}</th>
-                        <td>${recipe.name}</td>
-                        <td>
-                            <span class="badge ${recipe.status === 'draft' ? 'bg-warning-transparent' : 'bg-success-transparent'}">
-                                ${recipe.status.charAt(0).toUpperCase() + recipe.status.slice(1)}
-                            </span>
-                        </td>
-                        <td>
-                            ${recipe.categories.map(category =>
-                        `<span class="badge bg-light text-dark me-1">${category}</span>`
-                    ).join('')}
-                        </td>
-                        <td>
-                            ${recipe.tags.map(tag =>
-                        `<span class="badge bg-info-transparent me-1">${tag}</span>`
-                    ).join('')}
-                        </td>
-                        <td>
-                            <div class="hstack gap-2 flex-wrap">
-                                <a href="<?= base_url('admin/recipe/update/') ?>${recipe.id}"
-                                   class="text-info fs-14 lh-1">
-                                    <i class="ri-edit-line"></i>
-                                </a>
-                                <a href="javascript:void(0);"
-                                   class="text-danger fs-14 lh-1 delete-recipe"
-                                   data-recipe-id="${recipe.id}">
-                                    <i class="ri-delete-bin-5-line"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                `).join('');
-            }
-
-            function updatePagination(currentPage, totalPages) {
-                if (totalPages <= 1) {
-                    paginationContainer.innerHTML = '';
-                    return;
-                }
-
-                let paginationHtml = '<ul class="pagination mb-0">';
-
-                // Botón anterior
-                paginationHtml += `
-                    <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
-                        <a class="page-link" href="javascript:void(0);" data-page="${currentPage - 1}">
-                            <i class="ri-arrow-left-s-line align-middle"></i>
-                        </a>
-                    </li>
-                `;
-
-
-                // Páginas
-                for (let i = 1; i <= totalPages; i++) {
-                    if (i === currentPage) {
-                        paginationHtml += `
-                        <li class="page-item active">
-                            <a class="page-link" href="javascript:void(0);" data-page="${i}">${i}</a>
-                        </li>
-                    `;
-                    } else if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
-                        paginationHtml += `
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0);" data-page="${i}">${i}</a>
-                        </li>
-                    `;
-                    } else if (i === currentPage - 2 || i === currentPage + 2) {
-                        paginationHtml += `
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0);">...</a>
-                        </li>
-                    `;
-                    }
-                }
-
-                // Botón siguiente
-                paginationHtml += `
-                    <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
-                        <a class="page-link" href="javascript:void(0);" data-page="${currentPage + 1}">
-                            <i class="ri-arrow-right-s-line align-middle"></i>
-                        </a>
-                    </li>
-                `;
-
-                paginationHtml += '</ul>';
-                paginationContainer.innerHTML = paginationHtml;
-
-                // Manejador de eventos para la paginación
-                const pageLinks = document.querySelectorAll('.pagination .page-link');
-                pageLinks.forEach(link => {
-                    link.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const page = this.dataset.page;
-                        if (page && !isNaN(page) && page !== currentPage) {
-                            currentPage = parseInt(page);
-                            searchRecipes();
-                        }
-                    });
-                });
-            }
+        searchInput.addEventListener('input', function() {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                currentPage = 1;
+                searchRecipes();
+            }, 500);
         });
+
+        async function searchRecipes() {
+            const searchTerm = searchInput.value;
+            const url = new URL('<?= base_url('admin/recipe/search') ?>');
+            url.searchParams.append('search', searchTerm);
+            url.searchParams.append('page', currentPage);
+
+            try {
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data && data.recipes) {
+                    updateTable(data.recipes);
+                    updatePagination(data.currentPage, data.totalPages);
+                } else {
+                    throw new Error('Formato de respuesta inválido');
+                }
+            } catch (error) {
+                console.error('Error en la búsqueda:', error);
+
+                let errorMessage = 'Ocurrió un error al buscar las recetas';
+                if (error.message.includes('HTTP')) {
+                    errorMessage = `Error del servidor: ${error.message}`;
+                } else if (error.name === 'TypeError') {
+                    errorMessage = 'No se pudo conectar con el servidor';
+                }
+
+                Swal.fire('Error', errorMessage, 'error');
+            }
+        }
+
+        function updateTable(recipes) {
+            //tableBody.empty();
+
+            if (!recipes.length) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="text-center">No se encontraron recetas</td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tableBody.innerHTML = recipes.map(recipe => `
+                <tr>
+                    <th scope="row">${recipe.id}</th>
+                    <td>${recipe.name}</td>
+                    <td>
+                        <span class="badge ${recipe.status === 'draft' ? 'bg-warning-transparent' : 'bg-success-transparent'}">
+                            ${recipe.status.charAt(0).toUpperCase() + recipe.status.slice(1)}
+                        </span>
+                    </td>
+                    <td>
+                        ${recipe.categories.map(category =>
+                    `<span class="badge bg-light text-dark me-1">${category}</span>`
+                ).join('')}
+                    </td>
+                    <td>
+                        ${recipe.tags.map(tag =>
+                    `<span class="badge bg-info-transparent me-1">${tag}</span>`
+                ).join('')}
+                    </td>
+                    <td>
+                        <div class="hstack gap-2 flex-wrap">
+                            <a href="<?= base_url('admin/recipe/update/') ?>${recipe.id}"
+                                class="text-info fs-14 lh-1">
+                                <i class="ri-edit-line"></i>
+                            </a>
+                            <a href="javascript:void(0);"
+                                class="text-danger fs-14 lh-1 delete-recipe"
+                                onclick="deleteRecipe(${recipe.id})">
+                                <i class="ri-delete-bin-5-line"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function updatePagination(currentPage, totalPages) {
+            if (totalPages <= 1) {
+                paginationContainer.innerHTML = '';
+                return;
+            }
+
+            let paginationHtml = '<ul class="pagination mb-0">';
+
+            // Botón anterior
+            paginationHtml += `
+                <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                    <a class="page-link" href="javascript:void(0);" data-page="${currentPage - 1}">
+                        <i class="ri-arrow-left-s-line align-middle"></i>
+                    </a>
+                </li>
+            `;
+
+
+            // Páginas
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === currentPage) {
+                    paginationHtml += `
+                    <li class="page-item active">
+                        <a class="page-link" href="javascript:void(0);" data-page="${i}">${i}</a>
+                    </li>
+                `;
+                } else if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+                    paginationHtml += `
+                    <li class="page-item">
+                        <a class="page-link" href="javascript:void(0);" data-page="${i}">${i}</a>
+                    </li>
+                `;
+                } else if (i === currentPage - 2 || i === currentPage + 2) {
+                    paginationHtml += `
+                    <li class="page-item">
+                        <a class="page-link" href="javascript:void(0);">...</a>
+                    </li>
+                `;
+                }
+            }
+
+            // Botón siguiente
+            paginationHtml += `
+                <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                    <a class="page-link" href="javascript:void(0);" data-page="${currentPage + 1}">
+                        <i class="ri-arrow-right-s-line align-middle"></i>
+                    </a>
+                </li>
+            `;
+
+            paginationHtml += '</ul>';
+            paginationContainer.innerHTML = paginationHtml;
+
+            // Manejador de eventos para la paginación
+            const pageLinks = document.querySelectorAll('.pagination .page-link');
+            pageLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = this.dataset.page;
+                    if (page && !isNaN(page) && page !== currentPage) {
+                        currentPage = parseInt(page);
+                        searchRecipes();
+                    }
+                });
+            });
+        }
+
+        function deleteRecipe(recipeId) {
+            console.log(`Receta a eliminar: ${recipeId}`);
+            Swal.fire({
+                title: '¿Estás seguro que quieres eliminar la receta?',
+                text: "Esta acción no se puede deshacer.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Aquí puedes hacer la llamada AJAX para eliminar la receta
+                    fetch('<?= base_url('admin/recipe/delete') ?>', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: JSON.stringify({ recipe_id: recipeId })
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Error HTTP: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.success) { 
+                            console.log(`Receta con ID ${recipeId} eliminada`);
+                            Swal.fire('Eliminado', 'La receta ha sido eliminada.', 'success');
+                            searchRecipes(); // Actualizar la lista después de eliminar
+                        } else {
+                            throw new Error(data.error || 'No se pudo eliminar la receta');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al eliminar la receta:', error);
+                        Swal.fire('Error', error.message, 'error');
+                    });
+                }
+            });
+        }
     </script>
 
 

@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.innerHTML = `
                     <a href="${baseURL}/recetas/${menu.slug}">
                         <img
-                            src="${baseURL}/assets/img/temporada/${menu.image}"
+                            src="${baseURL}/assets/img/menus/${menu.image}"
                             class="img-fluid"
                             alt="${menu.name}"
                         />
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.innerHTML = `
                     <a href="${baseURL}/recetas/${menu.slug}">
                         <img
-                            src="${baseURL}/assets/img/festivo/${menu.image}"
+                            src="${baseURL}/assets/img/menus/${menu.image}"
                             class="img-fluid"
                             alt="${menu.name}"
                         />

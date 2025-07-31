@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Noto+Serif+JP:wght@200..900&display=swap');
 
 :root {
     --text-color: #241F1F;
@@ -16,6 +18,14 @@ html {
 /* Font styles */
 .kalam {
     font-family: 'Kalam', sans-serif;
+}
+
+.dancing-script {
+    font-family: 'Dancing Script', cursive;
+}
+
+.noto-serif-jp {
+    font-family: 'Noto Serif JP', serif;
 }
 
 /* Main banner */
@@ -111,6 +121,7 @@ html {
 
 /* Styles for Chef sidebar */
 .chef_sidebar_title {
+    font-family: 'Noto Serif JP', serif;
     font-size: 1.9375rem;
 }
 

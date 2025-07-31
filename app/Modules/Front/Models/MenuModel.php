@@ -20,4 +20,9 @@ class MenuModel extends Model
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
 
+    public function getMenuBySlug(string $slug): ?object
+    {
+        return $this->where('slug', $slug)->first();
+    }
+
 }

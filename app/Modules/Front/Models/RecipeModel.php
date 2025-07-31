@@ -75,4 +75,40 @@ class RecipeModel extends Model
         return $builder->get()->getCustomResultObject(\App\Entities\Recipe::class);
     }
 
+    public function getRecipesByCategory(array $categoryIds): array
+    {
+        $builder = $this->builder();
+        $builder->select('
+            recipe.id,
+            recipe.name,
+            recipe.slug,
+            recipe.image,
+            recipe.portions,
+            recipe.time,
+            recipe.difficulty,
+            (SELECT rating FROM score WHERE recipe_id = recipe.id) as rating
+        ');
+        $builder->join('recipe_category', 'recipe_category.recipe_id = recipe.id');
+        $builder->whereIn('recipe_category.category_id', $categoryIds);
+
+        return $builder->get()->getCustomResultObject(\App\Entities\Recipe::class);
+    }
+
+    public function getLikeRecipes(string $query): array
+    {
+        $builder = $this->builder();
+        $builder->select('
+            recipe.id,
+            recipe.name,
+            recipe.slug,
+            recipe.image,
+            recipe.difficulty,
+            recipe.calories,
+            (SELECT rating FROM score WHERE recipe_id = recipe.id) as rating
+        ');
+        $builder->like('recipe.name', $query);
+        $builder->orLike('recipe.slug', $query);
+        return $builder->get()->getResultArray();
+    }
+
 }

@@ -5,6 +5,7 @@ $routes->get('recipe/create', [App\Modules\Admin\Controllers\RecipeController::c
 $routes->get('recipe/edit', [App\Modules\Admin\Controllers\RecipeController::class, 'editRecipeView']);
 $routes->get('recipe/search', [App\Modules\Admin\Controllers\RecipeController::class, 'searchRecipes']);
 $routes->get('recipe/update/(:num)', [App\Modules\Admin\Controllers\RecipeController::class, 'updateRecipe/$1']);
+$routes->post('recipe/delete', [App\Modules\Admin\Controllers\RecipeController::class, 'deleteRecipe']);
 
 // Forms
 $routes->post('section/update', [App\Modules\Admin\Controllers\FormController::class, 'updateSection']);

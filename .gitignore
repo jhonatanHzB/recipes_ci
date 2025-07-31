@@ -124,21 +124,9 @@ _modules/*
 
 /results/
 /phpunit*.xml
-/public/assets/img/recipes/1751693933_6d60e24a7fd793af395e.jpg
-/public/assets/img/recipes/1751793988_dca104d9c3aef6859882.jpg
-/public/assets/img/recipes/1751794371_6057ccc1496093f75c92.jpg
-/public/assets/img/recipes/1751851932_9f95b6b759e46771eaa1.jpg
-/public/assets/img/recipes/1751852022_3329d9db5bbf101893b8.jpg
-/public/assets/img/recipes/1751871121_938aa43515f36057ea44.jpg
-/public/assets/img/recipes/1751871314_a7e015424df80826ad52.jpg
-/public/assets/img/recipes/1751871428_1527f76d55fab8ef40a6.jpg
-/public/assets/img/recipes/1751871452_1953bf7290f9f3720993.jpg
-/public/assets/img/recipes/1751871597_614dcdc80b59cd155609.jpg
-/public/assets/img/recipes/1751871795_20acb42cdb222604ff54.jpg
-/public/assets/img/recipes/1751872986_1bfe67586519effe71bc.jpg
-/public/assets/img/recipes/1752707824_868020d04b36dff56116.jpeg
-/public/assets/img/recipes/1752708014_c378609f0f1affaacb09.jpg
-/public/assets/img/recipes/1752708042_37fb5fca376842b72a1e.png
-/public/assets/img/recipes/1752708082_50e546c35c5317f0ec9d.png
-/public/assets/img/recipes/1752712278_ab55fa49fc466fe69ef4.jpg
-/public/assets/img/recipes/1752712331_dcf48b206aafbd06574b.jpg
+/public/assets/img/recipes/**.jpg
+/public/assets/img/recipes/**.png
+/public/assets/img/recipes/**.jpeg
+/public/assets/img/recipes/**.webp
+/public/assets/vid/**.mp4
+config.codekit3

@@ -29,4 +29,9 @@ class TagModel extends Model
         return $builder->get()->getResult();
     }
 
+    public function getTagByName(string $name): ?object
+    {
+        return $this->where('name', $name)->first();
+    }
+
 }

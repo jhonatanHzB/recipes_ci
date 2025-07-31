@@ -2,7 +2,6 @@
 
 namespace App\Modules\Admin\Controllers;
 
-use App\Entities\RecipeEntity;
 use App\Helpers\TimeHelper;
 use App\Modules\Admin\Controllers\BaseController;
 use App\Modules\Admin\Models\CategoryModel;
@@ -91,6 +90,21 @@ class RecipeController extends BaseController
         }
 
         return $this->response->setStatusCode(404);
+    }
+
+    public function deleteRecipe(): ResponseInterface
+    {
+        if ($this->request->isAJAX()) {
+            $recipeId = $this->request->getJSON()->recipe_id;
+
+            if ($this->recipeModel->delete($recipeId)) {
+                return $this->response->setJSON(['success' => true]);
+            }
+
+            return $this->response->setJSON(['success' => false, 'error' => 'No se pudo eliminar la receta']);
+        }
+
+        return $this->response->setJSON(['success'=> false,'error'=> 'Invalid request']);
     }
 
 }
