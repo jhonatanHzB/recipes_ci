@@ -25,7 +25,7 @@ class RecipeController extends BaseController
         $this->tagModel = new TagModel();
     }
 
-    public function createRecipe(): string
+    public function createRecipeView(): string
     {
         $data = [
             'user_id' => auth()->id(),
@@ -36,7 +36,7 @@ class RecipeController extends BaseController
         return view('admin/pages/recipe', $data);
     }
 
-    public function updateRecipe($recipe_id): string
+    public function updateRecipeView($recipe_id): string
     {
         $recipe = $this->recipeModel->getRecipeWithCategoriesAndTags($recipe_id);
         $recipe->setTime($this->timeHelper->minutesToTime($recipe->time));

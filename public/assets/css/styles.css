@@ -30,7 +30,14 @@ html {
 
 /* Main banner */
 .main-banner {
-    background: linear-gradient(to left,#efa65f,#f76a2d);
+    /* background: linear-gradient(to left,#efa65f,#f76a2d); */
+    background: linear-gradient(to left, #efa65fbf, #f76a2de6);
+    line-height: 1rem;
+}
+
+.main-banner-alternative {
+    background: white;
+    color: var(--primary-color);
     line-height: 1rem;
 }
 

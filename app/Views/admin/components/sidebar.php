@@ -75,7 +75,7 @@
 
                 <!-- Start::slide -->
                 <li class="slide">
-                    <a href="icons.html" class="side-menu__item">
+                    <a href="<?= base_url() ?>admin/category/create" class="side-menu__item">
                         <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"
                              fill="currentColor">
                             <path
@@ -84,7 +84,7 @@
                         </svg>
                         <span class="side-menu__label">Cargar categorias</span>
                     </a>
-                    <a href="icons.html" class="side-menu__item">
+                    <a href="<?= base_url() ?>admin/category/edit" class="side-menu__item">
                         <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"
                              fill="currentColor">
                             <path
