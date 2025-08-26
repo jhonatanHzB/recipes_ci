@@ -1,68 +1,104 @@
-# CodeIgniter 4 Application Starter
+# Recetario en CodeIgniter 4
 
-## What is CodeIgniter?
+Aplicación web modular para gestión y publicación de recetas, con frontend público y panel de administración. Incluye calificaciones, categorías, etiquetas, carrusel de destacados, páginas informativas, y reportes en Excel.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+## Características
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+- Front (público)
+  - Página de inicio con carrusel y secciones de recetas.
+  - Página de receta individual con ingredientes, instrucciones, tiempos por fase y dificultad.
+  - Calificación de recetas (estrellas) y promedio histórico.
+  - Listado y detalle por categorías y etiquetas.
+  - Búsqueda de recetas.
+  - Páginas: Video, Sobre mí, Contacto y Aviso de privacidad.
+- Admin
+  - Dashboard con métricas y reportes exportables a Excel.
+  - CRUD de Recetas.
+  - CRUD de Categorías con subida de imágenes y orden/posición.
+- Backend
+  - Módulos separados para la administración del Front y Administrador.
+  - Envío de correos.
+  - Autenticación basada en Shield.
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+## Tecnologías
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+- PHP 8.1+, CodeIgniter 4
+- Autenticación: CodeIgniter Shield
+- Reportes: PhpSpreadsheet
+- Construcción de assets: Node.js + npm + esbuild
+- Pruebas: PHPUnit
 
-## Installation & updates
+## Estructura
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+- app/Modules/Front
+  - Controllers: Home, Recipe, Contact, Media, Menu, Carousel
+  - Models: Recipe, Category, Tag, Menu, Media, Carousel, Sección, relaciones y puntuaciones
+  - Views: páginas públicas y celdas/secciones
+- app/Modules/Admin
+  - Controllers: Dashboard, Recipes, Categories, Reports, Forms
+  - Views: panel de administración
+- app/Entities
+  - Recipe: getters/setters avanzados (ingredientes, instrucciones, tiempos, dificultad, rating)
+  
+## Requisitos de servidor
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+- PHP 8.1 o superior con extensiones: intl, mbstring, json, mysqlnd (si usas MySQL), libcurl (para HTTP\CURLRequest).
+- Base de datos compatible con CodeIgniter 4.
+- Node.js y npm para construir assets.
 
-## Setup
+## Instalación
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+1) Clonar e instalar dependencias
+- Composer: `composer install`
+- Node: `npm install`
 
-## Important Change with index.php
+2) Configuración de entorno
+- Copiar `env` a `.env`
+- Ajustar `app.baseURL`
+- Configurar base de datos (DBDriver, hostname, database, username, password)
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+3) Migraciones y seeders
+- Ejecutar migraciones: `php spark migrate`
+- (Opcional) Ejecutar seeders si están disponibles: `php spark db:seed NombreDelSeeder`
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+4) Construcción de assets
+- Desarrollo: `npm run dev` (o equivalente definido)
+- Producción: `npm run build`
 
-**Please** read the user guide for a better explanation of how CI4 works!
+5) Servir la aplicación
+- Servidor embebido: `php spark serve`
+- O configurar virtual host apuntando a public/
 
-## Repository Management
+## Uso
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+- Front:
+  - Inicio con carrusel y secciones.
+  - Exploración por categorías y etiquetas.
+  - Búsqueda y detalle de recetas con calificación por estrellas.
+- Admin:
+  - Gestión de recetas y categorías (incluye subida de imagen en categorías).
+  - Exportación de reportes a Excel.
+  - Dashboard con estadísticas.
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+Nota: La aplicación expone endpoints JSON para ciertas secciones públicas (p. ej., carrusel y catálogos), útiles para cargar contenido dinámico en la UI.
 
-## Server Requirements
+## Pruebas
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+- Ejecutar suite: `vendor/bin/phpunit`
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+## Desarrollo
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
+- Estándares: PHP 8.1+, PSR, CI4.
+- Logs y depuración: usar las herramientas de CodeIgniter 4 (logger, barras de depuración).
+- Los módulos Front y Admin facilitan el mantenimiento y escalabilidad.
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+## Despliegue
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+- Asegura que el servidor apunte a public/.
+- Configura variables de entorno en `.env` apropiadas para producción.
+- Ejecuta `composer install --no-dev`, `php spark migrate --all` y `npm run build` antes de subir cambios.
+- Ajusta permisos de writable/ según tu entorno.
+
+## Licencia
+
+Distribuido bajo licencia open source incluida en el repositorio.
