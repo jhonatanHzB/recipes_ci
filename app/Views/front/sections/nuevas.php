@@ -1,4 +1,4 @@
-<p class="fw-bold display-1 mb-3 kalam">
+<p class="fw-bold display-1 mb-3 kalam title_color">
     <?= $section_name->name ?? ''; ?>
 </p>
 

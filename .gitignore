@@ -130,3 +130,4 @@ _modules/*
 /public/assets/img/recipes/**.webp
 /public/assets/vid/**.mp4
 config.codekit3
+/node_modules/

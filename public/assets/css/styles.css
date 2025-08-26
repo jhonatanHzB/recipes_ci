@@ -11,6 +11,11 @@
     --danger-color: #820A0E;
 }
 
+@font-face {
+    font-family: DKMango;
+    src: url(./fonts/DKMangoSmoothie.otf);
+}
+
 html {
     overflow-x: hidden;
 }
@@ -26,6 +31,10 @@ html {
 
 .noto-serif-jp {
     font-family: 'Noto Serif JP', serif;
+}
+
+.dk-mango {
+    font-family: 'DKMango', sans-serif;
 }
 
 /* Main banner */
@@ -56,6 +65,10 @@ html {
 }
 
 /* General styles */
+.title_color {
+    color: var(--primary-color);
+}
+
 .season_img,
 .recent_img,
 .section_img,
@@ -383,18 +396,26 @@ body.loading {
 /* Styles for social media */
 .bg-facebook {
     background-color: #3b5998;
+    width: 2.5rem;
+    height: 2.5rem;
 }
 
 .bg-instagram {
     background-color: #e1306c;
+    width: 2.5rem;
+    height: 2.5rem;
 }
 
 .bg-pinterest {
     background-color: #bd081c;
+    width: 2.5rem;
+    height: 2.5rem;
 }
 
 .bg-youtube {
     background-color: #ff0000;
+    width: 2.5rem;
+    height: 2.5rem;
 }
 
 @media screen and (min-width: 768px) {

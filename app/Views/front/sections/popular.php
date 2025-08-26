@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row mt-md-10">
         <div class="col-12 gx-0" data-aos="fade-up">
-            <p class="fw-bold section_title mb-3 kalam">
+            <p class="fw-bold section_title mb-3 kalam title_color">
                 <?= $section_name->name ?? ''; ?>
             </p>
             <hr>

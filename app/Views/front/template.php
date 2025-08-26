@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" />
 
     <!-- Personal styles -->
-    <link rel="stylesheet" href="<?= base_url('assets/css/styles.css?v=1.0'); ?>" />
+    <link rel="stylesheet" href="<?= base_url('assets/css/styles.min.css'); ?>" />
 
     <!-- Animate CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -28,6 +28,11 @@
 
     <!-- JQuery -->
     <script src="<?= base_url('assets/js/jquery-3.7.1.min.js'); ?>"></script>
+
+    <!--  BasePath: /  -->
+    <script>
+        var base_url = '<?= base_url(); ?>';
+    </script>
 
     <!-- Title -->
     <title>Chef Ana Paula</title>
@@ -47,14 +52,23 @@
 
     <div class="container d-none d-md-block">
 
-        <div class="row align-items-center justify-content-center">
-            <div class="col-lg-2 col-md-3 px-0">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-2 px-0">
                 <a href="<?= base_url(); ?>">
                     <img class="img-fluid" src="<?= base_url('assets/img/logo_chef.svg'); ?>" alt="Chef Ana Paula">
                 </a>
             </div>
-            <div class="col-lg-10 col-md-12">
-                <ul class="navbar-nav ms-auto">
+
+            <div class="col-3 px-0">
+                <form class="form-inline ms-auto px-3 px-md-0 py-4 py-md-0">
+                    <input type="search" class="form-control form-control-sm" data-bs-toggle="modal" data-bs-target="#searchModal" placeholder="Buscar recetas...">
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-center">
+                <ul class="navbar-nav">
 
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="<?= base_url('recetas'); ?>">Recetario</a>
@@ -124,13 +138,7 @@
                         <a class="nav-link" aria-current="page" href="<?= base_url('contacto'); ?>">Contacto</a>
                     </li>
 
-                    <li class="nav-item">
-                        <form class="form-inline ms-auto px-3 px-md-0 py-4 py-md-0">
-                            <input type="search" class="form-control form-control-sm" data-bs-toggle="modal" data-bs-target="#searchModal" placeholder="Buscar recetas...">
-                        </form>
-                    </li>
                 </ul>
-
 
             </div>
 
@@ -446,7 +454,7 @@
 <!--<script src="--><?php //= base_url('assets/js/loader.js'); ?><!--"></script>-->
 
 <!-- App JS -->
-<script src="<?= base_url('assets/js/app-min.js'); ?>"></script>
+<script src="<?= base_url('assets/js/app.min.js'); ?>"></script>
 
 </body>
 

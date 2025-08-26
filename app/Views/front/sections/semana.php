@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row mt-9 mb-5">
         <div class="col">
-            <h1 class="display-1 kalam">Para la semana</h1>
+            <h1 class="fw-bold display-1 kalam title_color">Para la semana</h1>
         </div>
     </div>
 
@@ -26,9 +26,9 @@
                         <div class="card-footer">
 
                             <!-- Preheading -->
-                            <h6 class="text-uppercase mb-1 text-body-secondary season_title">
+                            <h5 class="text-uppercase mb-1 season_title fw-bold">
                                 <?= $recipe->name; ?>
-                            </h6>
+                            </h5>
 
                             <!-- Heading -->
                             <div class="d-flex justify-content-between">

@@ -111,4 +111,17 @@ class RecipeModel extends Model
         return $builder->get()->getResultArray();
     }
 
+    public function getRandomRecipes(int $limit = 10): array
+    {
+        $builder = $this->builder();
+
+        $builder->select('id, name, slug, image, time, difficulty');
+        $builder->where('status', 'published');
+        $builder->where('image IS NOT NULL');
+        $builder->orderBy('RAND()');
+        $builder->limit($limit);
+
+        return $builder->get()->getCustomResultObject(\App\Entities\Recipe::class);
+    }
+
 }

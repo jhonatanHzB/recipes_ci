@@ -1,4 +1,3 @@
-const baseURL = 'http://localhost:8080/recipes_ci';
 document.addEventListener('DOMContentLoaded', () => {
     // Parar loader
     stopLoading();
@@ -13,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         startLoading();
 
         try {
-            const response = await fetch(baseURL + '/api/carousel');
+            const response = await fetch(base_url + '/api/carousel');
             const items = await response.json();
 
             // Limpiamos el contenedor actual
@@ -23,9 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
             items.forEach(item => {
                 const div = document.createElement('div');
                 div.innerHTML = `
-                    <a href="${baseURL}/receta/${item.slug}">
-                        <img src="${baseURL}/assets/img/recipes/${item.image}" class="img-fluid" alt="${item.name}">
-                        <h3 class="text-center mt-2">${item.name}</h3>
+                    <a href="${base_url}/receta/${item.slug}">
+                        <img src="${base_url}/assets/img/recipes/${item.image}" class="img-fluid" alt="${item.name}">
+                        <h3 class="text-center mt-2 dk-mango fs-1">${item.name}</h3>
                     </a>
                 `;
                 carouselContainer.appendChild(div);
@@ -71,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         startLoading();
 
         try {
-            const response = await fetch(baseURL + '/api/all-categories-carousel');
+            const response = await fetch(base_url + '/api/all-categories-carousel');
             const items = await response.json();
 
             // Limpiamos el contenedor actual
@@ -82,12 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const holidayMenu = items.holidayMenu;
 
             const divAllRecipe = document.createElement('div');
-            divAllRecipe.classList.add('d-block', 'col-12', 'col-md-2', 'px-3');
+            divAllRecipe.classList.add('d-block', 'col-5', 'col-md-2', 'px-3');
             divAllRecipe.style.height = '165px';
             divAllRecipe.innerHTML = `
-                <a href="${baseURL}/recetas">
+                <a href="${base_url}/recetas">
                     <img
-                            src="${baseURL}/assets/img/categories/chef_ana_paula.png"
+                            src="${base_url}/assets/img/categories/chef_ana_paula.png"
                             class="img-fluid"
                             alt="Recetario completo"
                     />
@@ -99,12 +98,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // Creamos y añadimos los elementos de las categorías
             categories.forEach(category => {
                 const div = document.createElement('div');
-                div.classList.add('d-block', 'col-12', 'col-md-2', 'px-3');
+                div.classList.add('d-block', 'col-5', 'col-md-2', 'px-3');
                 div.style.height = '150px';
                 div.innerHTML = `
-                    <a href="${baseURL}/recetas/${category.slug}">
+                    <a href="${base_url}/recetas/${category.slug}">
                         <img
-                            src="${baseURL}/assets/img/categories/${category.image}"
+                            src="${base_url}/assets/img/categories/${category.image}"
                             class="img-fluid"
                             alt="${category.name}"
                         />
@@ -116,12 +115,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // Creamos y añadimos los elementos del menú de temporada
             seasonMenu.forEach(menu => {
                 const div = document.createElement('div');
-                div.classList.add('d-block', 'col-12', 'col-md-2', 'px-3');
+                div.classList.add('d-block', 'col-5', 'col-md-2', 'px-3');
                 div.style.height = '165px';
                 div.innerHTML = `
-                    <a href="${baseURL}/recetas/${menu.slug}">
+                    <a href="${base_url}/recetas/${menu.slug}">
                         <img
-                            src="${baseURL}/assets/img/menus/${menu.image}"
+                            src="${base_url}/assets/img/menus/${menu.image}"
                             class="img-fluid"
                             alt="${menu.name}"
                         />
@@ -133,12 +132,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // Creamos y añadimos los elementos del menú día festivo
             holidayMenu.forEach(menu => {
                 const div = document.createElement('div');
-                div.classList.add('d-block', 'col-12', 'col-md-2', 'px-3');
+                div.classList.add('d-block', 'col-5', 'col-md-2', 'px-3');
                 div.style.height = '165px';
                 div.innerHTML = `
-                    <a href="${baseURL}/recetas/${menu.slug}">
+                    <a href="${base_url}/recetas/${menu.slug}">
                         <img
-                            src="${baseURL}/assets/img/menus/${menu.image}"
+                            src="${base_url}/assets/img/menus/${menu.image}"
                             class="img-fluid"
                             alt="${menu.name}"
                         />

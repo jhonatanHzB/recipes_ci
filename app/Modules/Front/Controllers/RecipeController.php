@@ -46,15 +46,19 @@ class RecipeController extends BaseController
         $recipe = $this->recipeModel->getRecipeWithScore($slug);
         $tags = $this->tagModel->getTagsOfRecipe($recipe->id);
         $recipeCategory = $this->recipeCategoryModel->where('recipe_id', $recipe->id)->first();
-        $relatedRecipesWithCategory = $this->recipeModel->getRandomRecipesWithSameCategory($recipeCategory->category_id, $recipe->id);
-
+        $recommendedRecipes = [];
+        if ($recipeCategory !== null) {
+            $relatedRecipesWithCategory = $this->recipeModel->getRandomRecipesWithSameCategory($recipeCategory->category_id, $recipe->id);
+        } else {
+            $recommendedRecipes = $this->recipeModel->getRandomRecipes();
+        }
 
         $data = [
             'location' => 'Recetas',
             'page'     => ucfirst(mb_strtolower($recipe->name, 'UTF-8')),
             'recipe'   => $recipe,
             'tags'     => $tags,
-            'relatedRecipesWithCategory' => $relatedRecipesWithCategory,
+            'relatedRecipesWithCategory' => $relatedRecipesWithCategory ?? $recommendedRecipes,
         ];
 
         return view('front/pages/recipe', $data);
