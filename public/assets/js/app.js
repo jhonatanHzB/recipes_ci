@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             class="img-fluid"
                             alt="${category.name}"
                         />
-                        <p class="text-center mt-1 h6">${category.name}</p>
+                        <p class="text-center mt-1 h5">${category.name}</p>
                 </a>`;
                 carouselAllCategoriesWrapper.appendChild(div);
             });

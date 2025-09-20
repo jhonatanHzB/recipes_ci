@@ -7,8 +7,8 @@
         <div class="col-12 col-md-7 mb-4 mb-md-0">
             <p class="dk-mango fs-2">
                 <b>Bienvenido</b> al recetario en línea de la Chef Ana Paula García con <b>más de 3,000</b>
-                deliciosas y prácticas recetas para todos los días y ocasiones, desde desayunos hasta cenas
-                especiales.
+                deliciosas y prácticas recetas para todos <br>
+                los días y ocasiones, desde desayunos hasta cenas especiales.
             </p>
             <p class="dk-mango fs-2">Descúbre tu próxima receta favorita y empieza a cocinar hoy.</p>
         </div>
@@ -23,27 +23,27 @@
 <div class="container">
     <div class="row">
         <div class="d-block col-6 col-md-6 col-lg-3 mb-4 mb-md-0 aos-init aos-animate" data-aos="fade-up">
-            <a href="<?= base_url() ?>recetas/entradas">
-                <img src="<?= base_url() ?>assets/img/categories/entradas.png" class="img-fluid category_img" alt="Entradas">
-                <p class="text-center fw-bold mt-1 h4">Entradas</p>
-            </a>
-        </div>
-        <div class="d-block col-6 col-md-6 col-lg-3 mb-4 mb-md-0 aos-init aos-animate" data-aos="fade-up">
             <a href="<?= base_url() ?>recetas/sopas-cremas">
                 <img src="<?= base_url() ?>assets/img/categories/cremas.png" class="img-fluid category_img" alt="Sopas/Cremas">
-                <p class="text-center fw-bold mt-1 h4">Sopas/Cremas</p>
+                <p class="text-center fw-bold mt-1 h3">Sopas/Cremas</p>
             </a>
         </div>
         <div class="d-block col-6 col-md-6 col-lg-3 mb-4 mb-md-0 aos-init aos-animate" data-aos="fade-up">
             <a href="<?= base_url() ?>recetas/plato-principal">
                 <img src="<?= base_url() ?>assets/img/categories/plato-fuerte.png" class="img-fluid category_img" alt="Plato principal">
-                <p class="text-center fw-bold mt-1 h4">Plato principal</p>
+                <p class="text-center fw-bold mt-1 h3">Plato principal</p>
             </a>
         </div>
         <div class="d-block col-6 col-md-6 col-lg-3 mb-4 mb-md-0 aos-init aos-animate" data-aos="fade-up">
             <a href="<?= base_url() ?>recetas/guarniciones-ensaladas">
                 <img src="<?= base_url() ?>assets/img/categories/guarnicion.png" class="img-fluid category_img" alt="Guarniciones/Ensaladas">
-                <p class="text-center fw-bold mt-1 h4">Guarniciones/Ensaladas</p>
+                <p class="text-center fw-bold mt-1 h3">Guarniciones/Ensaladas</p>
+            </a>
+        </div>
+        <div class="d-block col-6 col-md-6 col-lg-3 mb-4 mb-md-0 aos-init aos-animate" data-aos="fade-up">
+            <a href="<?= base_url() ?>recetas/postres">
+                <img src="<?= base_url() ?>assets/img/categories/postres.png" class="img-fluid category_img" alt="Postres">
+                <p class="text-center fw-bold mt-1 h3">Postres</p>
             </a>
         </div>
     </div>
@@ -70,6 +70,9 @@
 <div class="container">
     <div class="row my-10">
         <div class="col-12 col-md-8">
+            <a href="<?= base_url() ?>recetas/fiesta-de-mexico">
+                <img src="<?= base_url() ?>assets/img/banner/119061876_3036719076560604_6916966115108803622_n.jpg" class="img-fluid mb-8" alt="Banner Chef Ana Paula">
+            </a>
             <?= view_cell('App\Cells\SectionCell::renderThirdSection', 'section=2'); ?>
         </div>
 
