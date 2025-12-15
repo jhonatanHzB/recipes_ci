@@ -1,0 +1,16 @@
+# robots.txt para producción
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+# No bloquees CSS/JS/imagenes. Evita sólo rutas técnicas/no públicas si existen.
+# Disallow: /admin/          # Descomenta si tienes panel privado
+# Disallow: /writable/
+# Disallow: /node_modules/
+# Disallow: /vendor/
+# Disallow: /*?*session=      # Evita parámetros de sesión si aplica
+# Disallow: /*?*utm_          # Evita URLs con UTM si se indexan
+# Disallow: /*?*sort=         # Evita páginas de orden si son duplicadas
+
+# Sitemap(s)
+Sitemap: https://chefanapaula.com/sitemap.xml

@@ -55,7 +55,7 @@
                         <div class="col-12 col-md-4">
                             <p class="mb-1">Tiempo de Preparación</p>
                             <span class="fw-bolder">
-                                <?= $recipe->time; ?>
+                                <?= $recipe->time; ?> min
                             </span>
                         </div>
                         <div class="col-12 col-md-4">
@@ -67,7 +67,7 @@
                         <div class="col-12 col-md-4">
                             <p class="mb-1">Rinde</p>
                             <span class="fw-bolder">
-                                <?= $recipe->portions; ?>
+                                <?= $recipe->portions; ?> porciones
                             </span>
                         </div>
                     </div>
@@ -140,6 +140,8 @@
 
                 <!-- Content nutrimental information -->
                 <div class="col-12 col-md-4">
+
+                    <?php if ($recipe->calories > 0 || $recipe->carbohydrates > 0 || $recipe->fat > 0 || $recipe->protein > 0): ?>
                     <div class="recipe_nutrimental_content">
                         <p class="fw-bolder">Información nutrimental</p>
                         <table class="table table-sm" aria-describedby="tabla_nutrimental">
@@ -163,6 +165,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <?php endif; ?>
 
                     <div class="recipe_print_content">
                         <button
@@ -176,12 +179,10 @@
                         </button>
                     </div>
 
+                    <?php if (!empty($tags)): ?>
                     <div class="recipe_tags_content">
                         <p class="fw-bolder">Etiquetas</p>
                         <div class="d-flex flex-wrap row-gap-2 column-gap-2">
-                            <?php if (empty($tags)): ?>
-                                <span class="badge text-bg-secondary-subtle">No hay etiquetas</span>
-                            <?php endif; ?>
                             <?php foreach ($tags as $tag): ?>
                                 <a
                                     href="<?= base_url(); ?>recetas/<?= $tag->name; ?>"
@@ -190,6 +191,7 @@
                             <?php endforeach; ?>
                         </div>
                     </div>
+                    <?php endif; ?>
 
                     <?= view_cell('App\Cells\SectionCell::renderFirstSection', 'section=1'); ?>
                 </div>

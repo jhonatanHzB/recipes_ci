@@ -38,7 +38,7 @@
                                 </p>
                                 <p class="h6">
                                     <i class="far fa-clock"></i>
-                                    <?= $recipe->time; ?>
+                                    <?= $recipe->time; ?> min
                                 </p>
                             </div>
 

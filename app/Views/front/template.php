@@ -6,6 +6,44 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="<?= base_url('favicon.ico'); ?>" type="image/x-icon">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- SEO: título y descripción dinámicos -->
+    <?php
+        $defaultTitle = 'Chef Ana Paula — Recetas, videos y tips de cocina';
+        $pageTitle = $this->renderSection('meta_title') ?: $defaultTitle;
+    
+        $defaultDescription = 'Descubre recetas fáciles y deliciosas, videos y consejos de cocina con la Chef Ana Paula. Inspírate y cocina algo increíble hoy.';
+        $metaDescription = $this->renderSection('meta_description') ?: $defaultDescription;
+    
+        $canonical = $this->renderSection('canonical') ?: current_url();
+        $robots = $this->renderSection('meta_robots') ?: 'index,follow';
+        $ogType = $this->renderSection('og_type') ?: 'website';
+        $ogImage = $this->renderSection('og_image') ?: base_url('assets/img/og-default.jpg');
+    ?>
+
+    <meta name="description" content="<?= esc($metaDescription); ?>">
+    <meta name="robots" content="<?= esc($robots); ?>">
+    <link rel="canonical" href="<?= esc($canonical); ?>">
+    <link rel="alternate" hreflang="es" href="<?= esc($canonical); ?>">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="<?= esc($pageTitle); ?>">
+    <meta property="og:description" content="<?= esc($metaDescription); ?>">
+    <meta property="og:url" content="<?= esc($canonical); ?>">
+    <meta property="og:type" content="<?= esc($ogType); ?>">
+    <meta property="og:site_name" content="Chef Ana Paula">
+    <meta property="og:image" content="<?= esc($ogImage); ?>">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?= esc($pageTitle); ?>">
+    <meta name="twitter:description" content="<?= esc($metaDescription); ?>">
+    <meta name="twitter:image" content="<?= esc($ogImage); ?>">
+
+    <!-- Preconnect a CDNs -->
+    <link rel="preconnect" href="https://use.fontawesome.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
     <!-- Libs CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/libs.bundle.css'); ?>" />
@@ -36,6 +74,38 @@
 
     <!-- Title -->
     <title>Chef Ana Paula</title>
+
+    <!-- JSON-LD: Website y Organization -->
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "url": "<?= base_url(); ?>",
+          "name": "Chef Ana Paula",
+          "inLanguage": "es",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "<?= base_url('buscar'); ?>?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "Organization",
+          "name": "Chef Ana Paula",
+          "url": "<?= base_url(); ?>",
+          "logo": "<?= base_url('assets/img/chef_ana_paula_logo.png'); ?>",
+          "sameAs": [
+            "https://www.instagram.com/chefanapau/?hl=es-la",
+            "https://es-la.facebook.com/chefanapaula301785063209339/",
+            "https://www.youtube.com/channel/UCxxms1mNzAcJnGmXYqlxYUA",
+            "https://www.pinterest.es/chefanapaula/"
+          ]
+        }
+      ]
+    }
+    </script>
 </head>
 <body class="loading">
 

@@ -35,6 +35,7 @@ class Filters extends BaseFilters
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
         'session'       => \CodeIgniter\Shield\Filters\SessionAuth::class,
+        'noindex'       => \App\Filters\NoIndexFilter::class,
     ];
 
     /**
@@ -110,6 +111,9 @@ class Filters extends BaseFilters
             'before' => [
                 'admin/*',  // Protege todas las rutas que empiecen con admin/
             ]
+        ],
+        'noindex' => [
+            'before' => ['admin*'],
         ],
     ];
 }

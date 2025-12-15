@@ -85,6 +85,8 @@
     </div>
 </div>
 
+<?= view_cell('App\Cells\VideoCell'); ?>
+
 <script src="<?= base_url('assets/js/slick.min.js'); ?>"></script>
 <script type="module" src="https://cdn.jsdelivr.net/gh/lekoala/formidable-elements@master/dist/count-up.min.js"></script>
 

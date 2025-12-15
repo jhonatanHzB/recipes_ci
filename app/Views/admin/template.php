@@ -12,6 +12,8 @@
     <meta name="Author" content="Chef Ana Paula">
     <meta name="keywords" content="admin dashboard template,admin panel html, chef ana paula">
 
+    <meta name="robots" content="noindex, nofollow, noarchive">
+
     <!-- Favicon -->
     <link rel="shortcut icon" href="<?= base_url(); ?>favicon.ico" type="image/x-icon">
 
