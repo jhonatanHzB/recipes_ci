@@ -70,8 +70,8 @@
 <div class="container">
     <div class="row my-10">
         <div class="col-12 col-md-8">
-            <a href="<?= base_url() ?>recetas/fiesta-de-mexico">
-                <img src="<?= base_url() ?>assets/img/banner/119061876_3036719076560604_6916966115108803622_n.jpg" class="img-fluid mb-8" alt="Banner Chef Ana Paula">
+            <a href="<?= base_url() ?>recetas/navidad">
+                <img src="<?= base_url() ?>assets/img/banner/banner_navidad.jpeg" class="img-fluid banner__navidad mb-8" alt="Banner Chef Ana Paula">
             </a>
             <?= view_cell('App\Cells\SectionCell::renderThirdSection', 'section=2'); ?>
         </div>

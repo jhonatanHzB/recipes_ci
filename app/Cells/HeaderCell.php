@@ -16,5 +16,4 @@ class HeaderCell extends Cell
 
         return $this->view('../Views/admin/components/header', $this->data);
     }
-
 }
